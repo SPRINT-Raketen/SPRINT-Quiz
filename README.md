@@ -1,4 +1,4 @@
-Team SPRINT-Raketen
+**Team SPRINT-Raketen**
 - Christoph Borner (christophborner)
 - Michael	Brand (MichaelBrand84)
 - Michael	Pfyl (startrakete)
@@ -6,20 +6,12 @@ Team SPRINT-Raketen
 - Markus Teuffel (MarkusUsBern)
 - Jan	Widmayer (janwidmayer)
 
-
-Problem Statement
-
+**Problem Statement**
 // fehlt noch
 
-
-Short Description of the Applicaton
-
+**Short Description of the Applicaton**
 Name der Web Application: SPRINT-Quiz
-
 // Rest fehlt noch
 
-
-Rationale Behind our Project Selection
-
+**Rationale Behind our Project Selection**
 // fehlt noch
-
