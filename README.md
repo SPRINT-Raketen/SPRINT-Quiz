@@ -1,5 +1,4 @@
 Team SPRINT-Raketen
-
 - Christoph Borner (christophborner)
 - Michael	Brand (MichaelBrand84)
 - Michael	Pfyl (startrakete)
