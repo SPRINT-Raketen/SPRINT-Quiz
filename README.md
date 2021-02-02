@@ -1,11 +1,11 @@
 Team SPRINT-Raketen
 
-Christoph Borner (christophborner)
-Michael	Brand (MichaelBrand84)
-Michael	Pfyl (startrakete)
-Marcel Pilloud (pilloudmarcel)
-Markus Teuffel (MarkusUsBern)
-Jan	Widmayer (janwidmayer)
+- Christoph Borner (christophborner)
+- Michael	Brand (MichaelBrand84)
+- Michael	Pfyl (startrakete)
+- Marcel Pilloud (pilloudmarcel)
+- Markus Teuffel (MarkusUsBern)
+- Jan	Widmayer (janwidmayer)
 
 
 Problem Statement
