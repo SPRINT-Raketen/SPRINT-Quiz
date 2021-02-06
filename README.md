@@ -23,7 +23,8 @@ Ziel des Projekts ist es, die Fragen (inkl. vier Antworten und Schwierigkeitsstu
 Mögliche Erweiterungen können wie folgt aussehen:
 •	Das Spiel verfügt über ein modernes Design.
 •	Spieler stehen Hilfen zur Verfügung (Bsp. 50-50-Joker) 
-•	Der Spieler kann das Spiel mit neuen Fragen starten. Es kommen andere Fragen, als in den Runden zuvor. 
+•	Der Spieler kann das Spiel mit neuen Fragen starten. Es kommen andere Fragen, als in den Runden zuvor.
+•	Es kann zwischen verschiedenen Spielmodi gewählt werden (Bsp. Abbruch nach falscher Antwort / ganzes Spiele wird durchlaufen und die erzielten Punkte werden zusammengezählt)
 •	Das Spiel merkt sich die Spielstände der Spieler und auch Fragen, welche die Spieler (bereits früher) schon gelöst haben (mit individuellem Login). 
 
 
