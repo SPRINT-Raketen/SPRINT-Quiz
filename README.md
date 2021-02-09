@@ -18,7 +18,7 @@ Das Spiel setzt eine grosse Anzahl von Fragen auf verschiedenen Schwierigkeitsst
 
 **Name der Web Application: SPRINT-Quiz**
 
-Ziel des Projekts ist es, die Fragen (inkl. vier Antworten und Schwierigkeitsstufe) z. B. aus einer CSV-Datei über eine Schnittstelle direkt in eine neu erstellte Web-Applikation einzuspeisen. Zudem wird in einer ersten Version eine einfach gestaltete Anwednung erstellt (ohne Hilfen wie z. B. ein 50:50-Joker). Der Spieler kann das Spiel 1x spielen. Dabei werden die Fragen zufällig pro Schwierigkeitsstufe gewählt.
+Ziel des Projekts ist es, die Fragen (inkl. vier Antworten und Schwierigkeitsstufe) z. B. aus einer CSV-Datei über eine Schnittstelle direkt in eine neu erstellte Web-Applikation einzuspeisen. Zudem wird in einer ersten Version eine einfach gestaltete Anwendung erstellt (ohne Hilfen wie z. B. ein 50:50-Joker). Der Spieler kann das Spiel 1x spielen. Dabei werden die Fragen zufällig pro Schwierigkeitsstufe gewählt.
 
 Mögliche Erweiterungen können wie folgt aussehen:
 
