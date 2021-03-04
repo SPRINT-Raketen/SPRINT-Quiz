@@ -1,0 +1,33 @@
+body {
+    background-image: linear-gradient(to right, rgb(93, 148, 184), rgb(95, 125, 182), blue);
+    font-size: large;
+}
+
+h1 {color: rgb(29, 6, 6)}
+
+a {
+    color:rgb(38, 14, 173);
+}
+
+h2{
+    color: rgb(83, 12, 12);
+	background: rgb(11, 26, 161);
+    border: 5px white;
+    border-style: outset;
+    border-color: rgb(66, 64, 165);
+    padding: 10px;
+    width: 200px;
+}
+
+a:hover{background: rgb(116, 116, 170)}
+a:active{background: green}
+
+
+
+input{
+    padding: 10px;
+}
+
+
+
+
