@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Quiz Page</title>
+        <link rel = "stylesheet" href = "css/quizStyle.css">
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <script src="js/script.js"></script>
+        <script src="js/quiz.js"></script>
+    </head>
+
+    <body>
+        <img src = "millionen-quiz.png" width = "200" height="191" alt = "SPRINT-Quiz">
+        <p></p>
+
+        <section id="quiz1" style="display: none">
+            <form id="quiz" method="get" action="data.php">
+
+                <h1>Frage <span id="qno">0</span></h1>
+                <h1 id="question_text">Frage?</h1>
+
+                <input type="radio" name="answers" value="A"><span id="answer_a">Antwort A</span>
+                <input type="radio" name="answers" value="B"><span id="answer_b">Antwort B</span>
+                <p></p>
+                <input type="radio" name="answers" value="C"><span id="answer_c">Antwort C</span>
+                <input type="radio" name="answers" value="D"><span id="answer_d">Antwort D</span>
+
+                <p><input type="submit" onclick="" value="submit"></p>
+            </form>
+        </section>
+        <p></p>
+        <p><button id="continue"  onclick="ShowAndHide(); showQuestion()">Neue Frage anzeigen</button></p>       
+
+        <p> </p>
+        <button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>
+
+    </body>
+</html>
