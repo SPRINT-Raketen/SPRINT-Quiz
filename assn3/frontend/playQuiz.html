@@ -20,22 +20,29 @@
                 var myJsonObj = JSON.parse(JSON_url);
                 document.getElementById("question_text").innerHTML = myJsonObj.question;
                 document.getElementById("subject").innerHTML = myJsonObj.subject;
+                
+                //Weil es 4 Antworten sind, ist's ein Array. vgl. JSON
+                document.getElementById("answer_a").innerHTML = myJsonObj.answers[0];
+                document.getElementById("answer_b").innerHTML = myJsonObj.answers[1];
+                document.getElementById("answer_c").innerHTML = myJsonObj.answers[2];
+                document.getElementById("answer_d").innerHTML = myJsonObj.answers[3];
 
 
                 //die folgenden Attribute gibts im html noch nicht. Müssen die sichtbar sein?
                 document.getElementById("level").innerHTML = myJsonObj.level;
                 document.getElementById("sid").innerHTML = myJsonObj.id;
-                
-                //answerArray mit Strings aus JSON füllen (Weil es 4 Antworten sind, ist's ein Array)
-                var answerArray = myJsonObj.answers;
-                //document.getElementById("answer_a").innerHTML = answerArray[0];
-                document.getElementById("answer_a").innerHTML = myJsonObj.answers[0];
-                /*
-                for (i = 0; i < 4; i++) {
-                    document.getElementById("answer_a").innerHTML = myJsonObj.id;
-                }
-                */
             }
+            /*Was fehlt noch:
+                a) Der Ablauf ist momentan holprig, weil sich die Ansätze in die Quere kommenn.
+                    Momentan:
+                        0. Index: Klick "Start Quiz" -> Wechsel zu Quizbildschirm
+                        1. klick "neue Frage anzeigen" -> vordefinierte Frage taucht auf
+                        2. klick "Frage aus pseudo..." -> Frage aus JSON taucht auf
+                    mE Sinnvoller:
+                        0. Index: Klick "Start Quiz" -> Wechsel zu Quizbildschirm, erste Frage wird schon angezeigt
+                                                        dh im Hintergrund muss schon eine JSON-Abfrage passieren
+
+                        1. St
         </script>
         
 
