@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="utf-8" />
+    <script>
+        //const olten_url = "http://transport.opendata.ch/v1/locations?query=olten"
+        //const olten_url = 'http://github.com/SPRINT-Raketen/SPRINT-Quiz/blob/bc71d75f7ecf8c3738f1af7daac2ea2d59ce5407/assn3/frontend/dummyQuestion01.json'; //das ist ein provisorischer link zu einer dummyQuestion
+        const olten_url = '{"id":0,"level": 0,"subject": "dummyTest","question": "Wieviele Beine hat eine Katze?","answers": ["vier Beine", "3 Beine","7 Flügel","weiss nicht"]}';
+        const start_url = "http://localhost:8081/sprintquiztest/result3.php?sid=1100&level=1";
+        const next_url = "http://localhost:8081/sprintquiztest/result3.php?sid=2000&level=2";
+
+        /*
+        function myVerkehr() {
+            document.getElementById("question").innerHTML = olten_url; 
+            // sobald beendet, wird anonyme lambda Funktion in .then() aufgerufen
+            fetch(olten_url) //fetch: Daten aus anderen Dateien / vom Server holen (engl.: fetch) 
+                .then(response => {
+                    if (response.status === 200) {    // okay
+                        const json_obj = response.json();   // consume json, only once possible!
+                        console.log("json to var - return now");
+                        return json_obj;    // return consumed json to second .then() //Hier wird das eigentliche JSON-Objekt returned!
+                    } else {    // nok, so print error
+                        alert(response.status.toString() + ": " + response.statusText);
+                    }
+                })
+                .then(myJson => { // lambda to manage consumed jso //Und hier soll das JSON auf die verschiedenen Felder verteilt werden
+                    //console.log(JSON.stringify(myJson)); //Eigentlich will ich gar keinen String vom ganzen JSON. Ich will auf die einzelnen Attribute zugreifen
+                    var myJsonObj = myJson; //geht auch ohne diese Zeile
+                    document.getElementById("level").innerHTML = myJsonObj.stations.length.toString();
+                    document.getElementById("sid").innerHTML = "";
+                    document.getElementById("question").innerHTML = myJsonObj[i].question.length.toString();
+                    //document.getElementById("subject").innerHTML = myJsonObj.subject.length.toString();
+                    document.querySelector('subject').innerText = myJsonObj.subject.length.toString();
+                })
+        }
+         */
+
+        function parseJSON (){
+            var myJsonObj = JSON.parse(olten_url);
+            document.getElementById("level").innerHTML = myJsonObj.level;
+            document.getElementById("sid").innerHTML = myJsonObj.id;
+            document.getElementById("question").innerHTML = myJsonObj.question;
+        }
+       
+
+        function myReset() {
+            document.getElementById("question").innerHTML = "Platzhalter für Frage";
+            document.getElementById("level").innerHTML = "Level";
+            document.getElementById("sid").innerHTML = "Session ID";
+        }
+        function myStart() {
+            document.getElementById("question").innerHTML = "ich bin so krass der hacker!"; //also damit kann ich ein Textfeld befüllen
+            fetch(start_url)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+
+                    } else {    // nok, so print error
+                        alert(response.status.toString() + ": " + response.statusText);
+                    }
+                })
+                .then(myJson => {
+                    document.getElementById("question").innerHTML = myJson.question;
+                    document.getElementById("level").innerHTML = myJson.level;
+                    document.getElementById("sid").innerHTML = myJson.sid;
+                })
+        }
+        function myNext() {
+            document.getElementById("question").innerHTML = "Wow!";
+            fetch(next_url)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+
+                    } else {    // nok, so print error
+                        alert(response.status.toString() + ": " + response.statusText);
+                    }
+                })
+                .then(myJson => {
+                    document.getElementById("question").innerHTML = myJson.question;
+                    document.getElementById("level").innerHTML = myJson.level;
+                    document.getElementById("sid").innerHTML = myJson.sid;
+                })
+        }
+
+    </script>
+</header>
+
+<body>
+    <h1>Hier sollten jetzt die Frage + 4 Antworten angezeigt werden</h1>
+
+    <p id="question">A Question 8a</p>
+    <p id="level">Level</p>
+    <p id="subject">Platzhalter subject</p>
+    <p id="answer1">Platzhalter answer1</p>
+    <p id="answer2">Platzhalter answer2</p>
+    <p id="answer3">Platzhalter answer3</p>
+    <p id="answer3">Platzhalter answer4</p>
+    <p id="sid">Session ID</p>
+
+    <button onclick="myStart()">entspricht dem StartQuiz-Button im Startmenu</button>
+    <button onclick="myNext()">Weiter (=nächste Frage)</button>
+    <button onclick="myReset()">Reset (mir unklar für was das ist)</button>
+    <button onclick="myVerkehr()">laden via API</button>
+    <button onclick="parseJSON ()">JSON-parse</button>
+
+
+    <p>A function is triggered when the button is clicked.</p>
+
+</body>
+
+</html>

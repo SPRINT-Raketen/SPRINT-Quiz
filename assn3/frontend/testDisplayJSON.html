@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>SPRINT-Quiz</title>
+        <link rel = "stylesheet" href = "css/quizStyle.css">
+
+        <script src="js/script.js"></script>
+
+        <script>
+        //Hier wird das JSON-file eingelesen und gleich auf 4 Fragen + 1 Antwort verteilt.
+        var LoadedQuestion = JSON.parse(dummyQuestion00.json); //die uneleganten Konstante muss noch durch etwas variables ersetzt werden
+        LoadedQuestion.question //reicht das schon um angezeigt zu werden?
+        console.log(LoadedQuestion)
+
+        str = JSON.stringify(dummyQuestion00.json);
+        str = JSON.stringify(dummyQuestion00.json, null, 4); // (Optional) beautiful indented output.
+        console.log(str); // Logs output to dev tools console.
+        alert(str); // Displays output using window.alert()
+        </script>
+    </head>
+
+    <body>
+        <img src = "millionen-quiz.png" width = "200" height="191" alt = "SPRINT-Quiz">
+        <p></p>
+        
+        <p> </p>
+        <button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>
+
+    </body>
+
+</html>
