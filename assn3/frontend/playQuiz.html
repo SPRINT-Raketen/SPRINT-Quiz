@@ -9,6 +9,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
         <script src="js/script.js"></script>
+
+        <script>
+            //Laden des JSON-Objekts. Die url muss noch ersetzt werden durch etwas "Richtiges"
+            const JSON_url = '{"id":0,"level": 0,"subject": "dummyTest","question": "Wieviele Beine hat eine Katze?","answers": ["vier Beine", "3 Beine","7 Flügel","weiss nicht"]}';
+
+            //Diese Funktion parst das JSON-Objekt auf die einzelnen Feldern des html
+            function parseJSON (){
+                var myJsonObj = JSON.parse(JSON_url);
+                document.getElementById("question_text").innerHTML = myJsonObj.question;
+
+                //die folgenden Attribute gibts im html noch nicht. Müssen die sichtbar sein?
+                document.getElementById("level").innerHTML = myJsonObj.level;
+                document.getElementById("sid").innerHTML = myJsonObj.id;
+            }
+        </script>
+        
+
         <script src="js/quiz.js"></script>
     </head>
 
@@ -34,7 +51,7 @@
         
         <p></p>
         <p><button id="continue"  onclick="ShowAndHide(); showQuestion()">Neue Frage anzeigen</button></p>       
-
+        <button onclick="parseJSON ()">Frage aus pseudo-JSON laden (Später von Server holen)</button>
         <p> </p>
         <button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>
 
@@ -43,5 +60,6 @@
 
         <p> </p>
         <button><a href = "congratulation.html" title ="Anzeige bei erfolgreichen Abschluss des Quiz">PROVISORISCH: Gratulationsbildschirm</a></body></button>
+
     </body>
 </html>
