@@ -16,7 +16,6 @@ h2{
     border-style: outset;
     border-color: rgb(66, 64, 165);
     padding: 10px;
-    width: 200px;
 }
 
 a:hover{background: rgb(116, 116, 170)}
