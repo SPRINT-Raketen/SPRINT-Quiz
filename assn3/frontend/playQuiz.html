@@ -10,6 +10,7 @@
 
         <script src="js/script.js"></script>
 
+
         <!-- Ergänzung von Markus --> 
         <script>
             //Laden des JSON-Objekts. Die url muss noch ersetzt werden durch etwas "Richtiges"
@@ -41,7 +42,6 @@
                     mE Sinnvoller:
                         0. Index: Klick "Start Quiz" -> Wechsel zu Quizbildschirm, erste Frage wird schon angezeigt
                                                         dh im Hintergrund muss schon eine JSON-Abfrage passieren
-
                         1. buttons/Funktionen "submit","Neue Frage anzeigen","Frage aus pseudo..." zusammenführen
                             zB klick auf "submit" lädt im Hintergrund neues JSON, zeigt Inhalte an etc.
                 
@@ -49,7 +49,6 @@
             */
         </script>
         
-
         <script src="js/quiz.js"></script>
     </head>
 
@@ -58,21 +57,27 @@
         <p></p>
 
         <section id="quiz1" style="display: none">
-            <form id="quiz" method="" action="">
+            <form id="quiz" name="quiz" method="" action="">
 
-                <h1>Frage <span id="qno">0</span></h1>
+                <h3>Frage <span id="qno">0</span></h3>
                 <h1 id="question_text">Frage?</h1>
                               
                 <!-- Ergänzung von Markus --> 
-                <h1>Thema: </h1> <h1 id="subject">Platzhalter subject</h1>
+                <h3>Thema: <span id="subject">Platzhalter subject</span></h3>
 
-                <input type="radio" name="answers" value="A"><span id="answer_a">Antwort A</span>
-                <input type="radio" name="answers" value="B"><span id="answer_b">Antwort B</span>
-                <p></p>
-                <input type="radio" name="answers" value="C"><span id="answer_c">Antwort C</span>
-                <input type="radio" name="answers" value="D"><span id="answer_d">Antwort D</span>
+                <div>
+                    <input type="radio" id="answers_a" name="answers" value="A" onchange="checkAnswer(this)">
+                    <label for="answers_a"><span id="answer_a">Antwort A</span></label>
 
-                <p><input type="submit" onclick="" value="submit"></p>
+                    <input type="radio" id="answers_b" name="answers" value="B" onchange="checkAnswer(this)">
+                    <label for="answers_b"><span id="answer_b">Antwort B</span></label>
+                    <p></p>
+                    <input type="radio" id="answers_c" name="answers" value="C" onchange="checkAnswer(this)">
+                    <label for="answers_c"><span id="answer_c">Antwort C</span></label>
+
+                    <input type="radio" id="answers_d" name="answers" value="D" onchange="checkAnswer(this)">
+                    <label for="answers_d"><span id="answer_d">Antwort D</span></label>
+                </div>
             </form>
         </section>
         
@@ -81,7 +86,7 @@
         <!-- Ergänzung von Markus --> 
         <button onclick="parseJSON ()">Frage aus pseudo-JSON laden (Später von Server holen)</button>
         <p> </p>
-
+        <p></p>
         <button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>
         
         <!-- Ergänzung von Markus --> 
@@ -89,6 +94,9 @@
         <button><a href = "results.html" title ="Anzeige der aktuellen Punkte">PROVISORISCH: results (=aktueller Punktestand)</a></body></button>
         <p> </p>
         <button><a href = "congratulation.html" title ="Anzeige bei erfolgreichen Abschluss des Quiz">PROVISORISCH: Gratulationsbildschirm</a></body></button>
-
+        <p></p>
     </body>
+
 </html>
+
+
