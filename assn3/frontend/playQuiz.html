@@ -16,7 +16,8 @@
             // Link zum JSON-Objekt. Vorläufig statisch, später irgendwie mit API
             const json_url = 'https://raw.githubusercontent.com/SPRINT-Raketen/SPRINT-Quiz/frontend/assn3/frontend/dummyQuestion01.json';
             
-            /*Pseudo-JSON, zum Üben (Stand 08.03.21)
+            /*
+            Pseudo-JSON, zum Üben (Stand 08.03.21)
             const json_url = '{"id":0,"level": 0,"subject": "dummyTest","question": "Wieviele Beine hat eine Katze?","answers": ["vier Beine", "3 Beine","7 Flügel","weiss nicht"]}';
             */ 
 
@@ -43,6 +44,7 @@
                 .then(myJson => { // lambda to manage consumed jso
                     var parsedJSON = myJson; 
                     document.getElementById("question_text").innerHTML   = parsedJSON.question;
+                    document.getElementById("level").innerHTML   = parsedJSON.level;
                     document.getElementById("subject").innerHTML    = parsedJSON.subject;
                     document.getElementById("answer_a").innerHTML   = parsedJSON.answers[0];
                     document.getElementById("answer_b").innerHTML   = parsedJSON.answers[1];
@@ -107,9 +109,10 @@
 
                 <h3>Frage <span id="qno">0</span></h3>
                 <h1 id="question_text">Frage?</h1>
+                <h1>Level: <span id="level">Platzhalter level</span></h1>
                               
                 <!-- Ergänzung von Markus --> 
-                <h3>Thema: <span id="subject">Platzhalter subject</span></h3>
+                <h3>subject: <span id="subject">Platzhalter subject</span></h3>
 
                 <div>
                     <input type="radio" id="answers_a" name="answers" value="A" onchange="checkAnswer(this)">
