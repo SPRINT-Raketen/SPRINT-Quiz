@@ -42,7 +42,7 @@
                 //Diesen Teil will ich eigentlich in parseJSON und distributeJSONcontent auslagern, klappt aber noch nicht.
                 .then(myJson => { // lambda to manage consumed jso
                     var parsedJSON = myJson; 
-                    document.getElementById("question").innerHTML   = parsedJSON.question;
+                    document.getElementById("question_text").innerHTML   = parsedJSON.question;
                     document.getElementById("subject").innerHTML    = parsedJSON.subject;
                     document.getElementById("answer_a").innerHTML   = parsedJSON.answers[0];
                     document.getElementById("answer_b").innerHTML   = parsedJSON.answers[1];
