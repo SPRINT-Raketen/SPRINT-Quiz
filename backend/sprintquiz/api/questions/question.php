@@ -18,7 +18,26 @@ if (array_key_exists("query", $parts)) {
     // print_r($urlArgs);
     if (array_key_exists('id', $urlArgs)) {
         $id = $urlArgs['id'];
-        $filter = " WHERE question.id=$id";
+        $filter = " question.id=$id";
+    }
+    if (array_key_exists('level', $urlArgs)){
+        $levelId = $urlArgs['level'];
+        if(strlen($filter)>0){
+            $filter = $filter . " AND id_level=$levelId";
+        } else {
+            $filter = " id_level=$levelId";
+        }
+    }
+    if (array_key_exists('subject', $urlArgs)){
+        $subjectId = $urlArgs['subject'];
+        if(strlen($filter)>0){
+            $filter = $filter . " AND id_subject=$subjectId";
+        } else {
+            $filter = " id_subject=$subjectId";
+        }
+    }
+    if(strlen($filter)>0){
+        $filter = " WHERE ".$filter;
     }
 }
 

@@ -47,18 +47,28 @@
 
         // question functions
         function firstQuestion() {
-            $url = questionUrl+"?id=1";
+            $url = questionUrl+"?level=1";
             document.getElementById("url").innerHTML = $url;
             window.open($url);
         }
         function nextQuestion() {
-            $url = questionUrl+"?id=2";
+            $url = questionUrl+"?level=2";
             document.getElementById("url").innerHTML = $url;
             window.open($url);
         }
         function allQuestions() {
             document.getElementById("url").innerHTML = questionUrl;
             window.open(questionUrl);
+        }
+        function subjectQuestion() {
+            $url = questionUrl+"?subject=1";
+            document.getElementById("url").innerHTML = $url;
+            window.open($url);
+        }
+        function subjectLevelQuestion() {
+            $url = questionUrl+"?subject=1&level=2";
+            document.getElementById("url").innerHTML = $url;
+            window.open($url);
         }
     </script>
 </head>
@@ -80,9 +90,11 @@
     <button onclick="allLevels()">Schwierigkeiten (alles)</button>
 
     <h2>Frage (Question)</h2>
-    <button onclick="firstQuestion()">Start (id1)</button>
-    <button onclick="nextQuestion()">Weiter (id2)</button>
+    <button onclick="firstQuestion()">Start (level=1)</button>
+    <button onclick="nextQuestion()">nächstes Level (level=2)</button>
     <button onclick="allQuestions()">Fragen (alles)</button>
+    <button onclick="subjectQuestion()">alle Fragen Thema 1 (subject=1)</button>
+    <button onclick="subjectLevelQuestion()">alle Fragen Thema 1 Level 2(subject=1, level=2)</button>
 
     <p>A function is triggered when the button is clicked.</p>
 </body>
