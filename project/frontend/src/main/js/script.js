@@ -23,3 +23,21 @@ function startQuiz() {
     }
 }
 
+function show(x) {
+  //var x = document.getElementById('correct_answer');
+  if (x.style.display == 'none') {
+      x.style.display = 'block';
+  } else {
+
+  }
+}
+
+function hide(x){
+  //var x = document.getElementById('correct_answer');
+  if (x.style.display == 'block') {
+      x.style.display = 'none';
+  } else {
+
+  }
+}
+

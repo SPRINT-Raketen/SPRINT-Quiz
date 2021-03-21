@@ -7,14 +7,16 @@ function getRightAnswer(){
     return correctAnswer;
 }
 
-/*var currentQuestionNo = 0;
-var value =0;
-var currentQuestion;*/
+function getLastQuestion(){
+  var lastQuestion = fragen.length;
+  return lastQuestion;
+}
 
 
-let fragen = [['1', 'Was macht man mit einer Programmiersprache?', 'Wandern', 'Kochen', 'Programmieren', 'Zeichnen', 'C'],
-  ['2','Wie nennt man einen Fehler in einem Computerprogramm?','Bug', 'Hat', 'Pen','Code', 'A'],
-  ['3','Wie nennt man ein Textverarbeitungsprogramm?','Word', 'Works', 'Murks','Knorz', 'A']];
+let fragen = [['1', 'Was macht man mit einer Programmiersprache?', 'Wandern', 'Kochen', 'Programmieren', 'Zeichnen', 'C', '50'],
+  ['2','Wie nennt man einen Fehler in einem Computerprogramm?','Bug', 'Hat', 'Pen','Code', 'A', '100'],
+  ['3','Wie nennt man ein Textverarbeitungsprogramm?','Word ist ein Textverarbeitungsprogramm', 'Worst ist ein Textverarbeitungsprogramm',
+     'Murks ist ein Textverarbeitungsprogramm','Knorz ist ein Textverarbeitungsprogramm', 'A', '200']];
 var pos = -1;
 
 function showQuestion() {
@@ -25,14 +27,21 @@ function showQuestion() {
   $("#answer_b").text(fragen[pos][3]);
   $("#answer_c").text(fragen[pos][4]);
   $("#answer_d").text(fragen[pos][5]);
+  $("#level").text(fragen[pos][7]);
 }
 
 function checkAnswer(radio) { 
   if (radio.value == getRightAnswer()) {
-   alert("Gratulation, your answer is correct " + radio.value);
-   showQuestion();  
+    show(document.getElementById('correct_answer'));
+    show(document.getElementById('continue'))
+    if (pos == getLastQuestion()-1){
+      //alert("Won");
+      window.location.href="congratulation.html";
+    }
  } else {
    alert("Sorry, your answer is not correct: " + radio.value);
+   hide(document.getElementById('continue'));
+   window.location.href="results.html";
  }
  $('input:checked').removeAttr('checked');
 }
