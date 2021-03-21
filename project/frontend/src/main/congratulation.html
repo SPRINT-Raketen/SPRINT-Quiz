@@ -4,18 +4,28 @@
     <head>
         <meta charset="UTF-8">
         <title>SPRINT-Quiz</title>
-        <link rel = "stylesheet" href = "css/quizStyle.css">
+        <link rel = "stylesheet" href = "css/style.css">
 
         <script src="js/script.js"></script>
-
+        <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
 
     <body>
-        <img src = "trophy.png" width = "400" height="372" alt = "SPRINT-Quiz">
-        <p></p>
+        <div class = "row">
+            <div class="col-md-4">
+                <img src = "trophy.png" width = "400" height="372" alt = "SPRINT-Quiz">
+            </div>
+            <div class="col-md-7">
+                <h4 class="text-white">Du hast es geschafft und die letzte, schwerste Frage richtig beantwortet!<br><br>
+                    Ruhm und Ehre ist Dir gewiss!</h4>
+                <br>
+                <br>
+                <h5 class="text-white">Hinweis: Dieses Lob ist nicht notenrelevant.</h5>
+            </div>
+        </div>
 
         <audio id="applause" 
-            src="/local/applause.mp3" 
+            src="applause.mp3" 
             type="audio/mp3" 
             autoplay="true"
         >
@@ -24,16 +34,14 @@
         <p></p>
 
         <div id="textboxQuitGame">
-            <h1><p></p>Du hast es geschafft und die letzte, schwerste Frage richtig beantwortet!</p><p>Ruhm und Ehre ist Dir gewiss!</p></h1>
-            <h3><p></p>Hinweis: Dieses Lob ist nicht notenrelevant.</h3>
-            <h2>Im Hauptmenü kannst Du es nochmal versuchen.</h2>
+            <h5 class="text-white">Hier kannst Du es nochmal versuchen.</h5>
         </div>
 
-        <img src = "millionen-quiz.png" width = "200" height="191" alt = "SPRINT-Quiz">
-        <p></p>
+        <!--<img src = "millionen-quiz.png" width = "200" height="191" alt = "SPRINT-Quiz">
+        <p></p>-->
         
         <p> </p>
-        <button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>
+        <button class="btn btn-dark"><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>
 
     </body>
 
