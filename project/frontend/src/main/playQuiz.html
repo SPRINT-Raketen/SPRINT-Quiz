@@ -33,9 +33,8 @@
             var feedback_c;
             var feedback_d; 
 
-
             //generiert Anfrage an API mit Parametern Level, subject etc.
-            function buildAPIrequest (){
+            function buildAPIrequest () {
                 var baseURL="GET http://localhost:8081/sprintquiz/api/questions/question.php";
                 var endpointLevel;
                 var endpointSubject;
@@ -44,8 +43,8 @@
                 endpointSubject=subject;
 
                 //request mergen
-                json_url=//Zusammensetzen aus baseURL und den endpoints. falls endpoints!=null, müssen noch "?" rein. Spielt Reihenfolge der Parameter eine Rolle?
-            };
+                json_url="nix";//Zusammensetzen aus baseURL und den endpoints. falls endpoints!=null, müssen noch "?" rein. Spielt Reihenfolge der Parameter eine Rolle?
+            }
 
             //holt JSON-Objekt ab (vorläufig auf GitHub, später beim API)
             function getJSON (){
