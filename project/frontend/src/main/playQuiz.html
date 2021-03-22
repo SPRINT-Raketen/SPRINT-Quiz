@@ -19,8 +19,7 @@
         <script>
             // Link zum JSON-Objekt. Vorläufig statisch, später irgendwie mit API
             const json_url = 'https://raw.githubusercontent.com/SPRINT-Raketen/SPRINT-Quiz/main/project/frontend/src/main/dummyQuestion01.json';
-            
-            
+                        
             /*
             Pseudo-JSON, zum Üben, gegenwärtig überflüssig (Stand 08.03.21)
             const json_url = '{"id":0,"level": 0,"subject": "dummyTest","question": "Wieviele Beine hat eine Katze?","answers": ["vier Beine", "3 Beine","7 Flügel","weiss nicht"]}';
@@ -84,8 +83,6 @@
                 //distributeJSONcontent(parsedJSON_global);
             }
 
-
-
         /*
         //ab hier START Alter Code bevor Neustrukturierung github
             //Laden des JSON-Objekts. Die url muss noch ersetzt werden durch etwas "Richtiges"
@@ -108,22 +105,8 @@
                 document.getElementById("level").innerHTML = myJsonObj.level;
                 document.getElementById("sid").innerHTML = myJsonObj.id;
             }
-            /*Was fehlt noch:
-                a) Der Ablauf ist momentan holprig, weil sich die Ansätze in die Quere kommenn.
-                    Momentan:S
-                        0. Index: Klick "Start Quiz" -> Wechsel zu Quizbildschirm
-                        1. klick "neue Frage anzeigen" -> vordefinierte Frage taucht auf
-                        2. klick "Frage aus pseudo..." -> Frage aus JSON taucht auf
-                    mE Sinnvoller:
-                        0. Index: Klick "Start Quiz" -> Wechsel zu Quizbildschirm, erste Frage wird schon angezeigt
-                                                        dh im Hintergrund muss schon eine JSON-Abfrage passieren
-                        1. buttons/Funktionen "submit","Neue Frage anzeigen","Frage aus pseudo..." zusammenführen
-                            zB klick auf "submit" lädt im Hintergrund neues JSON, zeigt Inhalte an etc.
-                
-                b) Das JSONS-Script wechselt noch nicht zur nächsten Frage, es lädt immer das gleiche JSON
-            */
-        //ab hier START Alter Code bevor Neustrukturierung github
-        */ 
+        //ab hier ENDE Alter Code bevor Neustrukturierung github 
+        */
         </script>
         
         <script src="js/quiz.js"></script>
