@@ -17,9 +17,11 @@
 
         <!-- Ergänzung von Markus --> 
         <script>
-            // Link zum JSON-Objekt. Vorläufig statisch, später irgendwie mit API
-            const json_url = 'https://raw.githubusercontent.com/SPRINT-Raketen/SPRINT-Quiz/main/project/frontend/src/main/dummyQuestion01.json';
-                        
+            // Link zum einfachen JSON-Objekt. Vorläufig statisch, später irgendwie mit API
+            //const json_url = 'https://raw.githubusercontent.com/SPRINT-Raketen/SPRINT-Quiz/main/project/frontend/src/main/dummyQuestion01.json';
+                 
+            // Link zum JSON-Objekt nach Spezifikation des API. Vorläufig statisch, später irgendwie mit API
+            const json_url = 'https://raw.githubusercontent.com/SPRINT-Raketen/SPRINT-Quiz/b587a2041e395ad5571dd85c6092ac55e9846154/project/frontend/src/main/officialJSONdummy.json';
             /*
             Pseudo-JSON, zum Üben, gegenwärtig überflüssig (Stand 08.03.21)
             const json_url = '{"id":0,"level": 0,"subject": "dummyTest","question": "Wieviele Beine hat eine Katze?","answers": ["vier Beine", "3 Beine","7 Flügel","weiss nicht"]}';
@@ -45,6 +47,8 @@
                 })
 
                 //Diesen Teil will ich eigentlich in parseJSON und distributeJSONcontent auslagern, klappt aber noch nicht.
+                //Der folgende code ist noch für die alte, einfach Version des JSON (Stand 22.03)
+                /*
                 .then(myJson => { // lambda to manage consumed jso
                     var parsedJSON = myJson; 
                     document.getElementById("question_text").innerHTML   = parsedJSON.question;
@@ -54,6 +58,30 @@
                     document.getElementById("answer_b").innerHTML   = parsedJSON.answers[1];
                     document.getElementById("answer_c").innerHTML   = parsedJSON.answers[2];
                     document.getElementById("answer_d").innerHTML   = parsedJSON.answers[3];
+                })
+                */
+               
+                //Diesen Teil will ich eigentlich in parseJSON und distributeJSONcontent auslagern, klappt aber noch nicht.
+                //Der folgende code ist  für die neue Version des JSON, die dem API entspricht (Stand 22.03)
+                .then(myJson => { // lambda to manage consumed jso
+                    var parsedJSON = myJson; 
+                    //Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
+                    var questionId                                      =   parsedJSON.id;
+                    var levelId                                         =   parsedJSON.level.id;
+                    document.getElementById("level").innerHTML          =   levelId;
+                    var value                                           =   parsedJSON.level.value;
+                    var levelText                                       =   parsedJSON.level.text;
+                    var subjectId                                       =   parsedJSON.subject.id;
+                    document.getElementById("subject").innerHTML        =   parsedJSON.subject.text;
+                    document.getElementById("question_text").innerHTML  =   parsedJSON.question;
+                    document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
+                    var feedback_a                                      =   parsedJSON.answers[0].Feedback;
+                    document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
+                    var feedback_b                                      =   parsedJSON.answers[1].Feedback;
+                    document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
+                    var feedback_c                                      =   parsedJSON.answers[2].Feedback;
+                    document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
+                    var feedback_d                                      =   parsedJSON.answers[3].Feedback;
                 })
             }
 
@@ -226,6 +254,8 @@
         <button><a href = "congratulation.html" title ="Anzeige bei erfolgreichen Abschluss des Quiz">Gratulationsbildschirm</a></body></button>
         </section>
     </body>
+
+
     <!--Alter Code bevor Neustrukturierung github-->
     <!--<body>
         <img src = "millionen-quiz.png" width = "200" height="191" alt = "SPRINT-Quiz">
