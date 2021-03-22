@@ -14,24 +14,38 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
 
-
-        <!-- Ergänzung von Markus --> 
         <script>
-            // Link zum einfachen JSON-Objekt. Vorläufig statisch, später irgendwie mit API
-            //const json_url = 'https://raw.githubusercontent.com/SPRINT-Raketen/SPRINT-Quiz/main/project/frontend/src/main/dummyQuestion01.json';
-                 
             // Link zum JSON-Objekt nach Spezifikation des API. Vorläufig statisch, später irgendwie mit API
-            const json_url = 'https://raw.githubusercontent.com/SPRINT-Raketen/SPRINT-Quiz/b587a2041e395ad5571dd85c6092ac55e9846154/project/frontend/src/main/officialJSONdummy.json';
-            /*
-            Pseudo-JSON, zum Üben, gegenwärtig überflüssig (Stand 08.03.21)
-            const json_url = '{"id":0,"level": 0,"subject": "dummyTest","question": "Wieviele Beine hat eine Katze?","answers": ["vier Beine", "3 Beine","7 Flügel","weiss nicht"]}';
-            */ 
+            var json_url = 'https://raw.githubusercontent.com/SPRINT-Raketen/SPRINT-Quiz/b587a2041e395ad5571dd85c6092ac55e9846154/project/frontend/src/main/officialJSONdummy.json';
+          
+            var json_obj_global; //Zwischenspeicher um JSON von getJSON() an parseJSON () zu übergeben
+            var parsedJSON_global; //Zwischenspeicher um parsedJSON von parseJSON () an distributeJSONcontent ()  zu übergeben
 
-            var json_obj_global;
-            var parsedJSON_global;
+            //Variablen zum Zwischenspeichern der Werte aus JSON
+            var questionId;
+            var levelId=0; //0=Startwert. So wird zu Quizstart eine Frage mit Level 0 requestet. Später wird levelId der aktuellen Frage +1 requested
+            var value;    
+            var levelText;
+            var subject="Informatik"; //Eigentlich sollte das über die Einladung gemacht werden. Stand 22.03
+            var subjectId; 
+            var feedback_a;
+            var feedback_b;
+            var feedback_c;
+            var feedback_d; 
+
 
             //generiert Anfrage an API mit Parametern Level, subject etc.
-            function buildAPIrequest (){};
+            function buildAPIrequest (){
+                var baseURL="GET http://localhost:8081/sprintquiz/api/questions/question.php";
+                var endpointLevel;
+                var endpointSubject;
+
+                endpointLevel=levelId;
+                endpointSubject=subject;
+
+                //request mergen
+                json_url=//Zusammensetzen aus baseURL und den endpoints. falls endpoints!=null, müssen noch "?" rein. Spielt Reihenfolge der Parameter eine Rolle?
+            };
 
             //holt JSON-Objekt ab (vorläufig auf GitHub, später beim API)
             function getJSON (){
@@ -47,24 +61,41 @@
                 })
 
                 //Diesen Teil will ich eigentlich in parseJSON und distributeJSONcontent auslagern, klappt aber noch nicht.
-                //Der folgende code ist noch für die alte, einfach Version des JSON (Stand 22.03)
-                /*
                 .then(myJson => { // lambda to manage consumed jso
                     var parsedJSON = myJson; 
-                    document.getElementById("question_text").innerHTML   = parsedJSON.question;
-                    document.getElementById("level").innerHTML   = parsedJSON.level;
-                    document.getElementById("subject").innerHTML    = parsedJSON.subject;
-                    document.getElementById("answer_a").innerHTML   = parsedJSON.answers[0];
-                    document.getElementById("answer_b").innerHTML   = parsedJSON.answers[1];
-                    document.getElementById("answer_c").innerHTML   = parsedJSON.answers[2];
-                    document.getElementById("answer_d").innerHTML   = parsedJSON.answers[3];
+                    //Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
+                    questionId                                          =   parsedJSON.id;
+                    levelId                                             =   parsedJSON.level.id;
+                    document.getElementById("level").innerHTML          =   levelId;
+                    value                                               =   parsedJSON.level.value;
+                    levelText                                           =   parsedJSON.level.text;
+                    subjectId                                           =   parsedJSON.subject.id;
+                    document.getElementById("subject").innerHTML        =   parsedJSON.subject.text;
+                    document.getElementById("question_text").innerHTML  =   parsedJSON.question;
+                    document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
+                    feedback_a                                          =   parsedJSON.answers[0].Feedback;
+                    document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
+                    feedback_b                                          =   parsedJSON.answers[1].Feedback;
+                    document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
+                    feedback_c                                          =   parsedJSON.answers[2].Feedback;
+                    document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
+                    feedback_d                                          =   parsedJSON.answers[3].Feedback;
                 })
-                */
-               
-                //Diesen Teil will ich eigentlich in parseJSON und distributeJSONcontent auslagern, klappt aber noch nicht.
-                //Der folgende code ist  für die neue Version des JSON, die dem API entspricht (Stand 22.03)
-                .then(myJson => { // lambda to manage consumed jso
-                    var parsedJSON = myJson; 
+            }
+
+            //JSON parsen
+            function parseJSON (json_obj){
+                document.getElementById("answer3").innerHTML    = "parseJSON: VOR parse"; //nur zur Kontrolle
+                var parsedJSON_lokal = JSON.parse(json_obj);
+                document.getElementById("answer4").innerHTML    = "parseJSON: NACH parse"; //nur zur Kontrolle
+                return parsedJSON_lokal;
+            }
+
+            //schnippelt die eckigen Klammern aus JSON weg
+            function cleanJSON (parsedJSON) {}
+        
+            //JSON-Inhalte auf verschiedene Felder verteilen
+            function distributeJSONcontent (parsedJSON){
                     //Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
                     var questionId                                      =   parsedJSON.id;
                     var levelId                                         =   parsedJSON.level.id;
@@ -82,25 +113,6 @@
                     var feedback_c                                      =   parsedJSON.answers[2].Feedback;
                     document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
                     var feedback_d                                      =   parsedJSON.answers[3].Feedback;
-                })
-            }
-
-            //JSON parsen
-            function parseJSON (json_obj){
-                document.getElementById("answer3").innerHTML    = "parseJSON: VOR parse"; //nur zur Kontrolle
-                var parsedJSON_lokal = JSON.parse(json_obj);
-                document.getElementById("answer4").innerHTML    = "parseJSON: NACH parse"; //nur zur Kontrolle
-                return parsedJSON_lokal;
-            }
-        
-            //JSON-Inhalte auf verschiedene Felder verteilen
-            function distributeJSONcontent (parsedJSON){
-                document.getElementById("question").innerHTML   = parsedJSON.question;
-                document.getElementById("subject").innerHTML    = parsedJSON.subject;
-                document.getElementById("answer_a").innerHTML   = parsedJSON.answers[0];
-                document.getElementById("answer_b").innerHTML   = parsedJSON.answers[1];
-                document.getElementById("answer_c").innerHTML   = parsedJSON.answers[2];
-                document.getElementById("answer_d").innerHTML   = parsedJSON.answers[3];
             }
 
             //alle Schritte zusammen ausführen (neue Frage requesten, JSON aufnehmen, Inhalte anzeigen)
@@ -108,33 +120,9 @@
                 //buildAPIrequest ();
                 json_obj_global= getJSON();
                 //parsedJSON_global=parseJSON (json_obj_global);
+                //parsedJSON_global=cleanJSON (parsedJSON_global);
                 //distributeJSONcontent(parsedJSON_global);
             }
-
-        /*
-        //ab hier START Alter Code bevor Neustrukturierung github
-            //Laden des JSON-Objekts. Die url muss noch ersetzt werden durch etwas "Richtiges"
-            const JSON_url = '{"id":0,"level": 0,"subject": "dummyTest","question": "Wieviele Beine hat eine Katze?","answers": ["vier Beine", "3 Beine","7 Flügel","weiss nicht"]}';
-
-            //Diese Funktion parst das JSON-Objekt auf die einzelnen Feldern des html
-            function parseJSON (){
-                var myJsonObj = JSON.parse(JSON_url);
-                document.getElementById("question_text").innerHTML = myJsonObj.question;
-                document.getElementById("subject").innerHTML = myJsonObj.subject;
-                
-                //Weil es 4 Antworten sind, ist's ein Array. vgl. JSON
-                document.getElementById("answer_a").innerHTML = myJsonObj.answers[0];
-                document.getElementById("answer_b").innerHTML = myJsonObj.answers[1];
-                document.getElementById("answer_c").innerHTML = myJsonObj.answers[2];
-                document.getElementById("answer_d").innerHTML = myJsonObj.answers[3];
-
-
-                //die folgenden Attribute gibts im html noch nicht. Müssen die sichtbar sein?
-                document.getElementById("level").innerHTML = myJsonObj.level;
-                document.getElementById("sid").innerHTML = myJsonObj.id;
-            }
-        //ab hier ENDE Alter Code bevor Neustrukturierung github 
-        */
         </script>
         
         <script src="js/quiz.js"></script>
@@ -254,54 +242,6 @@
         <button><a href = "congratulation.html" title ="Anzeige bei erfolgreichen Abschluss des Quiz">Gratulationsbildschirm</a></body></button>
         </section>
     </body>
-
-
-    <!--Alter Code bevor Neustrukturierung github-->
-    <!--<body>
-        <img src = "millionen-quiz.png" width = "200" height="191" alt = "SPRINT-Quiz">
-        <p></p>
-
-        <section id="quiz1" style="display: none">
-            <form id="quiz" name="quiz" method="" action="">
-
-                <h3>Frage <span id="qno">0</span></h3>
-                <h1 id="question_text">Frage?</h1>
-                              
-                <-- Ergänzung von Markus -> 
-                <h3>Thema: <span id="subject">Platzhalter subject</span></h3>
-
-                <div>
-                    <input type="radio" id="answers_a" name="answers" value="A" onchange="checkAnswer(this)">
-                    <label for="answers_a"><span id="answer_a">Antwort A</span></label>
-
-                    <input type="radio" id="answers_b" name="answers" value="B" onchange="checkAnswer(this)">
-                    <label for="answers_b"><span id="answer_b">Antwort B</span></label>
-                    <p></p>
-                    <input type="radio" id="answers_c" name="answers" value="C" onchange="checkAnswer(this)">
-                    <label for="answers_c"><span id="answer_c">Antwort C</span></label>
-
-                    <input type="radio" id="answers_d" name="answers" value="D" onchange="checkAnswer(this)">
-                    <label for="answers_d"><span id="answer_d">Antwort D</span></label>
-                </div>
-            </form>
-        </section>
-        
-        <p></p>
-        <p><button id="continue"  onclick="ShowAndHide(); showQuestion()">Neue Frage anzeigen</button></p>       
-        <-- Ergänzung von Markus -> 
-        <button onclick="parseJSON ()">Frage aus pseudo-JSON laden (Später von Server holen)</button>
-        <p> </p>
-        <p></p>
-        <button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>
-        
-        <-- Ergänzung von Markus -> 
-        <p> </p>
-        <button><a href = "results.html" title ="Anzeige der aktuellen Punkte">PROVISORISCH: results (=aktueller Punktestand)</a></body></button>
-        <p> </p>
-        <button><a href = "congratulation.html" title ="Anzeige bei erfolgreichen Abschluss des Quiz">PROVISORISCH: Gratulationsbildschirm</a></body></button>
-        <p></p>
-    </body>-->
-
 </html>
 
 
