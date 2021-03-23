@@ -7,7 +7,6 @@
         <link rel = "stylesheet" href = "css/quizStyle.css">
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
         <script src="js/script.js"></script>
 
         <!-- Bootstrap -->
@@ -33,17 +32,25 @@
             var feedback_c;
             var feedback_d; 
 
-            //generiert Anfrage an API mit Parametern Level, subject etc.
-            function buildAPIrequest () {
-                var baseURL="GET http://localhost:8081/sprintquiz/api/questions/question.php";
+            //generiert Anfrage an API mit Parametern Level & subject
+            function buildAPIrequest (subject, level) {
+                var baseURL = "http://localhost:8081/sprintquiz/api/questions/question.php";
+                var APIcommand = "GET "; //GET ist eh default bei fetch(). Da ich vom frontend her nur GET brauche, kann ich das weglassen
                 var endpointLevel;
                 var endpointSubject;
+                const qm="?"; //qm=questionmark
+                const and="&";
 
-                endpointLevel=levelId;
+                endpointLevel=level + 1;
                 endpointSubject=subject;
 
-                //request mergen
-                json_url="nix";//Zusammensetzen aus baseURL und den endpoints. falls endpoints!=null, müssen noch "?" rein. Spielt Reihenfolge der Parameter eine Rolle?
+                /*request-url mergen
+                Vorlage: GET http://transport.opendata.ch/v1/connections?from=Lausanne&to=Genève
+                BSP aus pdf: GET http://localhost:8081/sprintquiz/api/questions/question.php?level=9
+                */
+                json_url=baseURL+qm+"level="+endpointLevel+and+qm+"subject="+endpointLevel;
+                
+                return json_url;
             }
 
             //holt JSON-Objekt ab (vorläufig auf GitHub, später beim API)
