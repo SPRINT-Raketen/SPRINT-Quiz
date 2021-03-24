@@ -33,7 +33,7 @@
             var feedback_d; 
 
             //generiert Anfrage an API mit Parametern Level & subject
-            function buildAPIrequest (subject, level) {
+            function buildAPIrequest (level, subject) {
                 var baseURL = "http://localhost:8081/sprintquiz/api/questions/question.php";
                 var APIcommand = "GET "; //GET ist eh default bei fetch(). Da ich vom frontend her nur GET brauche, kann ich das weglassen
                 var endpointLevel;
@@ -41,16 +41,16 @@
                 const qm="?"; //qm=questionmark
                 const and="&";
 
-                endpointLevel=level + 1;
+                endpointLevel=level+1;
                 endpointSubject=subject;
 
-                /*request-url mergen
+                /*request-url zusammenstellen
                 Vorlage: GET http://transport.opendata.ch/v1/connections?from=Lausanne&to=Genève
                 BSP aus pdf: GET http://localhost:8081/sprintquiz/api/questions/question.php?level=9
                 */
-                json_url=baseURL+qm+"level="+endpointLevel+and+qm+"subject="+endpointLevel;
+                json_url=baseURL+qm+"level="+endpointLevel+and+qm+"subject="+endpointSubject;
                 
-                return json_url;
+                return json_url; //Braucht es eigentlich nicht, da eh direkt in globaler Variable abgespeichert wird.
             }
 
             //holt JSON-Objekt ab (vorläufig auf GitHub, später beim API)
@@ -121,14 +121,14 @@
                     var feedback_d                                      =   parsedJSON.answers[3].Feedback;
             }
 
-            function banalTest (){
+            function displayCurrentJSON_URL (){
                 document.getElementById("json_url_DISPLAY").innerHTML       =   json_url;
             }
 
             //alle Schritte zusammen ausführen (neue Frage requesten, JSON aufnehmen, Inhalte anzeigen)
             function showNewQuestion (){
-                //buildAPIrequest (level, subject);
-                //banalTest();
+                buildAPIrequest (levelId, subject);
+                displayCurrentJSON_URL ();
                 json_obj_global= getJSON();
                 //parsedJSON_global=parseJSON (json_obj_global);
                 //parsedJSON_global=cleanJSON (parsedJSON_global);
@@ -198,11 +198,13 @@
                         <div class="col-md-2"></div>
                 </div>
                 
+                <!-- Start Ergänzung von Markus. Stand 24.04. Zum Test des REST API. Kann gelöscht werden. --> 
                 <div class="row">
                     <div class="col-md-1"></div>
-                    <h3 id="json_url_DISPLAY" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalte request</h3>
+                    <h4 id="json_url_DISPLAY" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalte Anzeige link REST API request</h3>
                     <div class="col-md-2"></div>
                 </div>
+                <!-- Ende Ergänzung von Markus. --> 
 
             </form>
         </section>
@@ -251,7 +253,7 @@
         
         <!-- Ergänzung von Markus --> 
         <p></p>
-        <button onclick="showNewQuestion (subject, level)">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
+        <button onclick="showNewQuestion ()">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
         <p></p>
         <section id="result" style="display: none">
         <button><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></body></button> <p></p>
