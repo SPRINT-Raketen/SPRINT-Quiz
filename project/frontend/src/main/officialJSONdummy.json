@@ -1,10 +1,10 @@
 {
     "id": "77",
     "level":
-    {   "id": "92",
+    {   "id": "3",
         "value": "8000",
         "text": "Frage der Stufe 9"},
-    "subject": {"id": "3", "text": "Informatikolo"},
+    "subject": {"id": "15", "text": "Informatikolo"},
     "question": "Wobei handelt es sich nicht um eine Programmiersprache?",
     "answers": [{"text": "Linuxi", "Feedback": "korrekt"}, {"text": "TypeScript",
     "Feedback": "leider falsch"}, {"text": "Java", "Feedback": "leider auch falsch"},
