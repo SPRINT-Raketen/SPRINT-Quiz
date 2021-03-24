@@ -1,7 +1,7 @@
 {
     "id": "77",
     "level":
-    {"id": "9",
+    {   "id": "9",
         "value": "8000",
         "text": "Frage der Stufe 9"},
     "subject": {"id": "3", "text": "Informatikolo"},
