@@ -4,9 +4,9 @@
     {   "id": "3",
         "value": "8000",
         "text": "Frage der Stufe 9"},
-    "subject": {"id": "15", "text": "Informatikolo"},
+    "subject": {"id": "15", "text": "Informatik"},
     "question": "Wobei handelt es sich nicht um eine Programmiersprache?",
-    "answers": [{"text": "Linuxi", "Feedback": "korrekt"}, {"text": "TypeScript",
+    "answers": [{"text": "Linux", "Feedback": "korrekt"}, {"text": "TypeScript",
     "Feedback": "leider falsch"}, {"text": "Java", "Feedback": "leider auch falsch"},
     {"text": "Python", "Feedback": "komplett falsch"}]
 }
