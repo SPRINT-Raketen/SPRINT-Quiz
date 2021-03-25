@@ -138,8 +138,11 @@
     <body>
         <!--Zeile mit Quiz beenden-->
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-6"></div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6" id="subject_line" style="display: none">
+                <h6 class="d-inline p-2 bg-dark text-white">Thema <span id="subjectId">0</span>: <span id="subject">Subject</span></h6>
+            </div>
+            <div class="col-md-2"></div>
             <div class="col-md-2">
                 <section id="result" style="display: none">
                     <button class="btn btn-dark"><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></button>
@@ -223,6 +226,7 @@
         </div>
         <!--Anzeige Quiz starten; erscheint nur auf 1. Seite-->
         <p><button class="display-1" id="startQuiz" style="display:block" onclick="
+                        show(document.getElementById('subject_line'));
                         show(document.getElementById('result'));
                         show(document.getElementById('quiz1'));
                         showQuestion();
@@ -242,7 +246,7 @@
         <p></p>
         <button onclick="showNewQuestion ()">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
         <p></p>
-        <section id="result" style="display: none">
+        <section id="result" style="display:none">
         <button><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></body></button> <p></p>
         </section>
         <section id="congratulation" style="display:none">
