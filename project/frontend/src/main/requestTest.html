@@ -5,7 +5,6 @@
         <meta charset="UTF-8">
         <title>Quiz Page</title>
         <link rel = "stylesheet" href = "css/quizStyle.css">
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/script.js"></script>
@@ -26,7 +25,7 @@
             var levelId=0; //0=Startwert. So wird zu Quizstart eine Frage mit Level 0 requestet. Später wird levelId der aktuellen Frage +1 requested
             var value;    
             var levelText;
-            var subject="Informatik"; //Eigentlich sollte das über die Einladung gemacht werden. Stand 22.03
+            var subject="Informatiki"; //Eigentlich sollte das über die Einladung gemacht werden. Stand 22.03
             var subjectId; 
             var feedback_a;
             var feedback_b;
@@ -42,10 +41,10 @@
                 const qm="?"; //qm=questionmark
                 const and="&";
 
-                endpointLevel=level + 1;
+                endpointLevel=level+1;
                 endpointSubject=subject;
 
-                /*request-url mergen
+                /*request-url zusammenstellen
                 Vorlage: GET http://transport.opendata.ch/v1/connections?from=Lausanne&to=Genève
                 BSP aus pdf: GET http://localhost:8081/sprintquiz/api/questions/question.php?level=9
                 */
@@ -128,8 +127,8 @@
 
             //alle Schritte zusammen ausführen (neue Frage requesten, JSON aufnehmen, Inhalte anzeigen)
             function showNewQuestion (){
-                displayCurrentJSON_URL ();
                 buildAPIrequest (levelId, subject);
+                displayCurrentJSON_URL ();
                 json_obj_global= getJSON();
                 //parsedJSON_global=parseJSON (json_obj_global);
                 //parsedJSON_global=cleanJSON (parsedJSON_global);
@@ -143,11 +142,8 @@
     <body>
         <!--Zeile mit Quiz beenden-->
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-6" id="subject_line" style="display: none">
-                <h6 class="d-inline p-2 bg-dark text-white">Thema <span id="subjectId">0</span>: <span id="subject">Subject</span></h6>
-            </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-6"></div>
             <div class="col-md-2">
                 <section id="result" style="display: none">
                     <button class="btn btn-dark"><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></button>
@@ -200,13 +196,13 @@
                     <button class="h3 col-md-4 d-inline p-2 bg-primary text-white" type="button" role="alert" id="answers_d" name="answers" value="D" onclick="checkAnswer(this)">
                         <label for="answers_d"><span id="answer_d">Antwort D</span></label></button>
                         <div class="col-md-2"></div>
-                </div> 
+                </div>
                 
                 <!-- Start Ergänzung von Markus. Stand 24.04. Zum Test des REST API. Kann gelöscht werden. --> 
                 <div class="row">
-                <div class="col-md-1"></div>
-                <h4 id="json_url_DISPLAY" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter Anzeige link REST API request</h3>
-                <div class="col-md-2"></div>
+                    <div class="col-md-1"></div>
+                    <h4 id="json_url_DISPLAY" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalte Anzeige link REST API request</h3>
+                    <div class="col-md-2"></div>
                 </div>
                 <!-- Ende Ergänzung von Markus. --> 
 
@@ -240,7 +236,6 @@
         </div>
         <!--Anzeige Quiz starten; erscheint nur auf 1. Seite-->
         <p><button class="display-1" id="startQuiz" style="display:block" onclick="
-                        show(document.getElementById('subject_line'));
                         show(document.getElementById('result'));
                         show(document.getElementById('quiz1'));
                         showQuestion();
@@ -260,7 +255,7 @@
         <p></p>
         <button onclick="showNewQuestion ()">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
         <p></p>
-        <section id="result" style="display:none">
+        <section id="result" style="display: none">
         <button><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></body></button> <p></p>
         </section>
         <section id="congratulation" style="display:none">
