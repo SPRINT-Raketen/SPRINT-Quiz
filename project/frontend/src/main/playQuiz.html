@@ -42,6 +42,8 @@
                 const qm="?"; //qm=questionmark
                 const and="&";
 
+                level = Number(level);
+
                 endpointLevel=level + 1;
                 endpointSubject=subject;
 
@@ -128,12 +130,17 @@
 
             //alle Schritte zusammen ausführen (neue Frage requesten, JSON aufnehmen, Inhalte anzeigen)
             function showNewQuestion (){
-                displayCurrentJSON_URL ();
-                buildAPIrequest (levelId, subject);
+                //displayCurrentJSON_URL ();
+                //buildAPIrequest (levelId, subject);
                 json_obj_global= getJSON();
                 //parsedJSON_global=parseJSON (json_obj_global);
                 //parsedJSON_global=cleanJSON (parsedJSON_global);
                 //distributeJSONcontent(parsedJSON_global);
+            }
+
+            function generateAndShowNextJSON_URL (){
+                displayCurrentJSON_URL ();
+                buildAPIrequest (levelId, subject);
             }
         </script>
         
@@ -260,7 +267,14 @@
         <p></p>
         <button onclick="showNewQuestion ()">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
         <p></p>
+<<<<<<< Updated upstream
         <section id="result" style="display:none">
+=======
+        <p></p>
+        <button onclick="generateAndShowNextJSON_URL ()">URL zur nächsten Frage anzeigen</button> <p></p>
+        <p></p>
+        <section id="result" style="display: none">
+>>>>>>> Stashed changes
         <button><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></body></button> <p></p>
         </section>
         <section id="congratulation" style="display:none">
