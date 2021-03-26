@@ -1,4 +1,4 @@
-# Team SPRINT-Raketen
+# Team SPRINT-Raketen (Web App: SPRINT-Quiz)
 - Christoph Borner (christophborner)
 - Michael	Brand (MichaelBrand84)
 - Michael	Pfyl (startrakete)
