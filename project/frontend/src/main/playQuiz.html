@@ -191,22 +191,34 @@
                 <!--Antworten A und B-->
                 <div class="row">
                     <div class="col-md-1"></div>
-                    <button class="h3 col-md-4 d-inline p-2 bg-primary text-white" type="button" role="alert" id="answers_a" name="answers" value="A" onclick="checkAnswer(this)">
-                        <label for="answers_a"><span id="answer_a">Antwort A</span></label></button>
+
+                    <button class="h3 col-md-4 d-inline p-2 btn btn-primary text-white" type="button" role="alert" id="answers_a" name="answers" value="A" 
+                        onclick="deselectAnswer(this); checkAnswer(this)">
+                        <h3><label for="answers_a"><span id="answer_a">Antwort A</span></label></h3></button>
+
                     <div class="col-md-1"></div>
-                    <button class="h3 col-md-4 d-inline p-2 bg-primary text-white" type="button" role="alert" id="answers_b" name="answers" value="B" onclick="checkAnswer(this)">
-                        <label for="answers_b"><span id="answer_b">Antwort B</span></label></button>
-                        <div class="col-md-1"></div>
+
+                    <button class="h3 col-md-4 d-inline p-2 btn btn-primary text-white" type="button" role="alert" id="answers_b" name="answers" value="B" 
+                        onclick="deselectAnswer(this); checkAnswer(this)">
+                        <h3><label for="answers_b"><span id="answer_b">Antwort B</span></h3></label></button>
+
+                    <div class="col-md-1"></div>
                     </div>
                 <!--Antworten C und D-->
                 <div class="row">
                     <div class="col-md-1"></div>
-                    <button class="h3 col-md-4 d-inline p-2 bg-primary text-white" type="button" role="alert" id="answers_c" name="answers" value="C" onclick="checkAnswer(this)">
-                        <label for="answers_c"><span id="answer_c">Antwort C</span></label></button>
+
+                    <button class="h3 col-md-4 d-inline p-2 btn btn-primary text-white" type="button" role="alert" id="answers_c" name="answers" value="C" 
+                        onclick="deselectAnswer(this); checkAnswer(this)">
+                        <h3><label for="answers_c"><span id="answer_c">Antwort C</span></label></h3></button>
+
                     <div class="col-md-1"></div>
-                    <button class="h3 col-md-4 d-inline p-2 bg-primary text-white" type="button" role="alert" id="answers_d" name="answers" value="D" onclick="checkAnswer(this)">
-                        <label for="answers_d"><span id="answer_d">Antwort D</span></label></button>
-                        <div class="col-md-2"></div>
+
+                    <button class="h3 col-md-4 d-inline p-2 btn btn-primary text-white" type="button" role="alert" id="answers_d" name="answers" value="D" 
+                        onclick="deselectAnswer(this); checkAnswer(this)">
+                        <h3><label for="answers_d"><span id="answer_d">Antwort D</span></label></h3></button>
+
+                    <div class="col-md-2"></div>
                 </div> 
                 
                 <!-- Start Ergänzung von Markus. Stand 24.04. Zum Test des REST API. Kann gelöscht werden. --> 
@@ -225,13 +237,13 @@
         <div class="row">
             <div class="col-md-1"></div>
             <!--display correct answer-->
-            <section id="correct_answer" style="display: none" class="col-md-9 text-center">
+            <section id="correct_answer" style="display: none" class="col-md-10 text-center">
                 <h4 class="d-inline p-2 bg-success text-white">Gratulation, your answer is correct.</h4>
             </section>
 
             <!--display false answer-->
-            <section id="false_answer" style="display: none" class="col-md-1">
-                <h4 class="d-inline p-2 bg-danger text-white">Sorry, your answer is not correct.</h4>
+            <section id="false_answer" style="display: none" class="col-md-10 text-cente1">
+                <h4 class="d-inline p-2 bg-danger text-white">Die Antwort ist leider nicht richtig.</h4>
             </section>
         </div>
         <p></p>
@@ -241,6 +253,10 @@
             <div class="col-md-9">
                 <button class="btn btn-dark .btn-circle.btn-xl" type="button" id="continue" style="display:none" onclick="
                     showQuestion();
+                    selectAnswer(document.getElementById('answers_a'));
+                    selectAnswer(document.getElementById('answers_b'));
+                    selectAnswer(document.getElementById('answers_c'));
+                    selectAnswer(document.getElementById('answers_d'));
                     hide(document.getElementById('continue'));
                     hide(document.getElementById('correct_answer'))"><h4>Next Question</h4></button>      
             </div>
@@ -263,23 +279,30 @@
         <p> </p>
         <!--<button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>-->
         
+        <!--Möglichkeit, das Resultat anzuschauen und ein neues Quiz zu starten-->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-9">
+                <button class="btn btn-dark .btn-circle.btn-xl" id="newQuiz" style="display:none">                                            
+                <a href = "results.html">Weiter</button></div>      
+        </div>
+
         <!-- Ergänzung von Markus --> 
         <p></p>
         <button onclick="showNewQuestion ()">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
         <p></p>
-<<<<<<< Updated upstream
-        <section id="result" style="display:none">
-=======
+        <!--<section id="result" style="display:none">-->
         <p></p>
         <button onclick="generateAndShowNextJSON_URL ()">URL zur nächsten Frage anzeigen</button> <p></p>
         <p></p>
-        <section id="result" style="display: none">
->>>>>>> Stashed changes
+        
+        <!--<section id="result" style="display: none">
+
         <button><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></body></button> <p></p>
         </section>
         <section id="congratulation" style="display:none">
         <button><a href = "congratulation.html" title ="Anzeige bei erfolgreichen Abschluss des Quiz">Gratulationsbildschirm</a></body></button>
-        </section>
+        </section>-->
     </body>
 </html>
 

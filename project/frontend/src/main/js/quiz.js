@@ -45,18 +45,27 @@ function showQuestion() {
 
 }
 
-function checkAnswer(radio) { 
-  if (radio.value == getRightAnswer()) {
+//Prüfung, ob die gewählte Antwort richtig ist
+function isAnswerRight(solution){
+  return solution.value == getRightAnswer();
+}
+
+//zeigt Text an, je nachdem ob Antwort richtig oder falsch war
+function checkAnswer(solution) { 
+  if (solution.value == getRightAnswer()) {
+    //alert("your answer is correct: " + solution.value);
     show(document.getElementById('correct_answer'));
     show(document.getElementById('continue'))
     if (pos == getLastQuestion()-1){
-      //alert("Won");
+      alert("Wow, du hast es geschafft!!");
       window.location.href="congratulation.html";
     }
  } else {
-   alert("Sorry, your answer is not correct: " + radio.value);
-   hide(document.getElementById('continue'));
-   window.location.href="results.html";
+    show(document.getElementById('false_answer')); 
+    //alert("Sorry, your answer is not correct: " + solution.value);
+    hide(document.getElementById('continue'));
+    show(document.getElementById('newQuiz'))
+    //window.location.href="results.html";
  }
- $('input:checked').removeAttr('checked');
+ //$('input:checked').removeAttr('checked');
 }

@@ -41,3 +41,27 @@ function hide(x){
   }
 }
 
+function deselectAnswer(id) {
+  if (isAnswerRight(id) == true){
+    $(id).addClass("btn-success");
+    $(id).removeClass("btn-primary");
+  } else {
+    $(id).addClass("btn-danger");
+    $(id).removeClass("btn-primary");
+  }
+  $(id).addClass("disabled");
+  $('#answers_a').addClass("disabled");
+  $('#answers_b').addClass("disabled");
+  $('#answers_c').addClass("disabled");
+  $('#answers_d').addClass("disabled");
+  //alert("deselect");
+}
+
+function selectAnswer(id) {
+  $(id).removeClass("btn-success");
+  $(id).addClass("btn-primary");
+  $(id).removeClass("disabled");
+  //$("#button1").addClass("active");
+  //alert("select"+id);
+}
+
