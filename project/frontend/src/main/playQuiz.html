@@ -152,7 +152,7 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-6" id="subject_line" style="display: none">
-                <h6 class="d-inline p-2 bg-dark text-white">Thema <span id="subjectId">0</span>: <span id="subject">Subject</span></h6>
+                <h6 class="d-inline p-2 bg-dark text-white">Thema <span id="subjectId">0</span>: <span id="subjectText">Subject</span></h6>
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-2">
@@ -163,9 +163,11 @@
         </div>
         <br>
         <br>
-        <div id="image" style="display:block">
+        <!--Bild auf erster Seite-->
+        <div id="image" style="display:block" class="text-center">
             <img src = "millionen-quiz.png" width = "200" height="191" alt = "SPRINT-Quiz">
         </div>
+
         <!--Section mit Frage und Antworten-->
         <section id="quiz1" style="display: none">
             <form id="quiz" name="quiz" method="" action="">
@@ -177,7 +179,7 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-2"></div>
                     <div class="col-md-2">
-                        <h4 class="d-inline p-2 bg-warning text-white">Level: <span id="value">Betrag</span></h4>
+                        <h4 class="d-inline p-2 bg-warning text-white">Level <span id="levelId">levelId</span>: <span id="levelValue">Betrag</span></h4>
                     </div>
                 </div>
                 <br>
@@ -237,14 +239,15 @@
         <div class="row">
             <div class="col-md-1"></div>
             <!--display correct answer-->
-            <section id="correct_answer" style="display: none" class="col-md-10 text-center">
-                <h4 class="d-inline p-2 bg-success text-white">Gratulation, your answer is correct.</h4>
-            </section>
+            <div id="correct_answer" style="display: none" class="col-md-9 text-center p-2 bg-success text-white">
+                <h4>Gratulation, die Antwort ist richtig.</h4>
+            </div>
 
             <!--display false answer-->
-            <section id="false_answer" style="display: none" class="col-md-10 text-cente1">
-                <h4 class="d-inline p-2 bg-danger text-white">Die Antwort ist leider nicht richtig.</h4>
-            </section>
+            <div id="false_answer" style="display: none" class="col-md-9 text-center p-2 bg-danger text-white">
+                <h4>Die Antwort ist leider nicht richtig.</h4>
+            </div>
+            <div class="col-md-1"></div>
         </div>
         <p></p>
         <!--Anzeige nächste Frage-->
