@@ -46,8 +46,7 @@
                 endpointSubject=subject;
 
                 /*request-url mergen
-                Vorlage: GET http://transport.opendata.ch/v1/connections?from=Lausanne&to=Genève
-                BSP aus pdf: GET http://localhost:8081/sprintquiz/api/questions/question.php?level=9
+                Vorlage aus pdf: GET http://localhost:8081/sprintquiz/api/questions/question.php?level=9
                 */
                 json_url=baseURL+"?level="+endpointLevel+"&subject="+endpointSubject;
                 
@@ -128,8 +127,6 @@
 
             //alle Schritte zusammen ausführen (neue Frage requesten, JSON aufnehmen, Inhalte anzeigen)
             function showNewQuestion (){
-                //displayCurrentJSON_URL ();
-                //buildAPIrequest (levelId, subject);
                 json_obj_global= getJSON();
                 //parsedJSON_global=parseJSON (json_obj_global);
                 //parsedJSON_global=cleanJSON (parsedJSON_global);
@@ -138,7 +135,7 @@
 
             function generateAndShowNextJSON_URL (){
                 displayCurrentJSON_URL ();
-                buildAPIrequest (levelId, subject);
+                //buildAPIrequest (levelId, subject);
             }
         </script>
         
