@@ -72,11 +72,11 @@
                     //Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
                     questionId                                          =   parsedJSON.id;
                     levelId                                             =   parsedJSON.level.id;
-                    document.getElementById("level").innerHTML          =   levelId;
+                    //document.getElementById("level").innerHTML          =   levelId;
                     value                                               =   parsedJSON.level.value;
                     levelText                                           =   parsedJSON.level.text;
                     subjectId                                           =   parsedJSON.subject.id;
-                    document.getElementById("subject").innerHTML        =   parsedJSON.subject.text;
+                    document.getElementById("subjectText").innerHTML    =   parsedJSON.subject.text;
                     document.getElementById("question_text").innerHTML  =   parsedJSON.question;
                     document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
                     feedback_a                                          =   parsedJSON.answers[0].Feedback;
@@ -109,7 +109,7 @@
                     var value                                           =   parsedJSON.level.value;
                     var levelText                                       =   parsedJSON.level.text;
                     var subjectId                                       =   parsedJSON.subject.id;
-                    document.getElementById("subject").innerHTML        =   parsedJSON.subject.text;
+                    document.getElementById("subjectText").innerHTML    =   parsedJSON.subject.text;
                     document.getElementById("question_text").innerHTML  =   parsedJSON.question;
                     document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
                     var feedback_a                                      =   parsedJSON.answers[0].Feedback;
@@ -277,14 +277,6 @@
         <p> </p>
         <!--<button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>-->
         
-        <!--Möglichkeit, das Resultat anzuschauen und ein neues Quiz zu starten-->
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-9">
-                <button class="btn btn-dark .btn-circle.btn-xl" id="newQuiz" style="display:none">                                            
-                <a href = "results.html">Weiter</button></div>      
-        </div>
-
         <!-- Ergänzung von Markus --> 
         <p></p>
         <button onclick="showNewQuestion ()">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
@@ -301,6 +293,13 @@
         <section id="congratulation" style="display:none">
         <button><a href = "congratulation.html" title ="Anzeige bei erfolgreichen Abschluss des Quiz">Gratulationsbildschirm</a></body></button>
         </section>-->
+        <!--Möglichkeit, das Resultat anzuschauen und ein neues Quiz zu starten-->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-9">
+                <button class="btn btn-dark .btn-circle.btn-xl" id="newQuiz" style="display:none">                                            
+                <a href = "results.html">Weiter</button></div>      
+        </div>
     </body>
 </html>
 
