@@ -1,9 +1,0 @@
-{
-    "id":0,
-    "comment2id": "comments werden in json nicht unterstützt...Hier wäre ein automatisches Prozedere zur Vergabe der id besser",
-    "level": 0, 
-    "comment2level": "hier wär' wohl ein Enum gut",
-    "subject": "mediokres Thema",
-    "question": "Welcher Tag ist heute?",
-    "answers": ["Januar", "Freitag","Arbeitstag","2021"]
-}
