@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script>
+        const subjectUrl = "http://localhost:8081/sprintquiz/api/subjects/subject.php";
+        const levelUrl = "http://localhost:8081/sprintquiz/api/levels/level.php";
+        const questionUrl = "http://localhost:8081/sprintquiz/api/questions/question.php";
+
+        function myReset() {
+            document.getElementById("url").innerHTML = "(Platzhalter für aufgerufenen URI)";
+            document.getElementById("json").innerHTML = "(Platzhalter für JSON-Antwort)";
+        }
+
+        function deleteRequest(baseUrl, id) {
+            url = baseUrl + "?id=" + id;
+            document.getElementById("url").innerHTML = url;
+            // parameter = {method:'DELETE', headers: {'Content-Type': 'application/json', 'charset': 'UTF-8'}, body: JSON.stringify(data)};
+            parameter = { method: 'DELETE', headers: { 'Content-Type': 'application/json', 'charset': 'UTF-8' } };
+            fetch(url, parameter)
+                .then(response => {
+                    if (response.status === 200 || response.status === 404) {    // okay
+                        const json_obj = response.json();   // consume json, only once possible!
+                        // console.log("json to var - return now");
+                        return json_obj;    // return consumed json to second .then()
+                    } else {    // nok, so print error
+                        alert(response.status.toString() + ": " + response.statusText);
+                        return response.json();
+                    }
+                })
+                .then(myJson => { // lambda to manage consumed json
+                    console.log(JSON.stringify(myJson));
+                    var myJsonObj = myJson;
+                    document.getElementById("json").innerHTML = JSON.stringify(myJson);
+                });
+        }
+
+        function updateRequest(url, data) {
+            document.getElementById("url").innerHTML = url;
+            parameter = { method: 'PUT', headers: { 'Content-Type': 'application/json', 'charset': 'UTF-8' }, body: JSON.stringify(data) };
+            fetch(url, parameter)
+                .then(response => {
+                    if (response.status === 200) {    // okay
+                        const json_obj = response.json();   // consume json, only once possible!
+                        // console.log("json to var - return now");
+                        return json_obj;    // return consumed json to second .then()
+                    } else {    // nok, so print error
+                        alert(response.status.toString() + ": " + response.statusText);
+                        return response.json();
+                    }
+                })
+                .then(myJson => { // lambda to manage consumed json
+                    console.log(JSON.stringify(myJson));
+                    var myJsonObj = myJson;
+                    document.getElementById("json").innerHTML = JSON.stringify(myJson);
+                });
+        }
+
+        function createRequest(url,data) {
+            document.getElementById("url").innerHTML = url;
+            parameter = { method: 'POST', headers: { 'Content-Type': 'application/json', 'charset': 'UTF-8' }, body: JSON.stringify(data) };
+            fetch(url, parameter)
+                .then(response => {
+                    if (response.status === 201) {    // okay
+                        const json_obj = response.json();   // consume json, only once possible!
+                        // console.log("json to var - return now");
+                        return json_obj;    // return consumed json to second .then()
+                    } else {    // nok, so print error
+                        alert(response.status.toString() + ": " + response.statusText);
+                        return response.json();
+                    }
+                })
+                .then(myJson => { // lambda to manage consumed json
+                    console.log(JSON.stringify(myJson));
+                    var myJsonObj = myJson;
+                    document.getElementById("json").innerHTML = JSON.stringify(myJson);
+                })
+        }
+
+        function getRequest(url){
+            document.getElementById("url").innerHTML = url;
+            parameter = { method: 'GET', headers: { 'Content-Type': 'application/json', 'charset': 'UTF-8' } };
+            fetch(url, parameter)
+                .then(response => {
+                    if (response.status === 200) {    // okay
+                        const json_obj = response.json();   // consume json, only once possible!
+                        return json_obj;    // return consumed json to second .then()
+                    } else {    // nok, so print error
+                        alert(response.status.toString() + ": " + response.statusText);
+                        return response.json();
+                    }
+                })
+                .then(myJson => { // lambda to manage consumed json
+                    console.log(JSON.stringify(myJson));
+                    var myJsonObj = myJson;
+                    document.getElementById("json").innerHTML = JSON.stringify(myJson);
+                })
+        }
+
+        // subject functions
+        function getAllSubjects() {
+            url = subjectUrl;
+            getRequest(url);
+        }
+        function createSubject() {
+            url = subjectUrl;
+            subject = document.getElementById("subject_text").value;
+            data = { 'text': subject };
+            createRequest(url,data);
+        }
+        function updateSubject() {
+            id = document.getElementById("subject_id").value;
+            url = subjectUrl + "?id=" + id;
+            subject = document.getElementById("subject_text").value;
+            data = { 'text': subject };
+            updateRequest(url, data);
+        }
+        function deleteSubject() {
+            const id = document.getElementById("subject_id").value;
+            deleteRequest(subjectUrl, id);
+        }
+
+
+        // question functions
+        function getQuestion() {
+            const id = document.getElementById("question_id").value;
+            const level = document.getElementById("level_id").value;
+            const subject = document.getElementById("questsubject_id").value;
+            var filter = "";
+            if(id>0){
+                filter = "id="+id;
+            }
+            if(level >0){
+                if(filter.length>0){
+                    filter = filter + "&level="+level;
+                }else{
+                    filter = "level="+level;
+                }
+            }
+            if(subject >0){
+                if(filter.length>0){
+                    filter = filter + "&subject="+subject;
+                }else{
+                    filter = "subject="+subject;
+                }
+            }
+            if(filter.length>0){
+                filter = "?"+filter;
+            }
+
+            url = questionUrl +filter;
+            getRequest(url);
+        }
+        function createQuestion() {
+            url = questionUrl;
+            data = {};
+            updateRequest(url, data);
+        }
+        function updateQuestions() {
+            const id = document.getElementById("question_id").value;
+            url = questionUrl +"?id="+id;
+            data = {};
+            updateRequest(url, data);
+        }
+        function deleteQuestion() {
+            const id = document.getElementById("question_id").value;
+            deleteRequest(questionUrl, id);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>REST API Testoberfläche </h1>
+
+    <p id="url">(Platzhalter für aufgerufenen URI)</p>
+    <p id="json">(Platzhalter für JSON-Antwort)</p>
+    <button onclick="myReset()">Reset</button>
+
+    <h2>Themen (Subject)</h2>
+    <button onclick="createSubject()">POST (erstellen)</button>
+    <button onclick="updateSubject()">PUT (ändern)</button>
+    <button onclick="deleteSubject()">DELETE (löschen)</button>
+    <button onclick="getAllSubjects()">Themen (alles)</button>
+    <br />
+    <label for="subject_id">Subject.id:</label>
+    <input type="number" id="subject_id" />
+    <label for="subject_text">Subject.text:</label>
+    <input type="text" id="subject_text" />
+
+    <!-- <h2>Schwierigkeit (Level)</h2>
+    <button onclick="firstLevel()">Start (id1)</button>
+    <button onclick="nextLevel()">Weiter (id2)</button>
+    <button onclick="allLevels()">Schwierigkeiten (alles)</button> -->
+
+    <h2>Frage (Question)</h2>
+    <button onclick="getQuestion()">Frage abholen</button>
+    <button onclick="createQuestion()">POST</button>
+    <button onclick="updateQuestions()">PUT</button>
+    <button onclick="deleteQuestion()">DELETE</button>
+    <br />
+    <label for="question_id">Question.id:</label>
+    <input type="number" id="question_id" />
+    <label for="level_id">Level.id:</label>
+    <input type="number" id="level_id" />
+    <label for="questsubject_id">Subject.id:</label>
+    <input type="number" id="questsubject_id" />
+
+    <p>A function is triggered when the button is clicked.</p>
+
+    <a href="index.html">Home</a>
+</body>
+
+</html>
