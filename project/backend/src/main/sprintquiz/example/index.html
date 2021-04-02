@@ -15,14 +15,14 @@
 
         // subject functions
         function firstSubject() {
-            $url = subjectUrl+"?id=1";
-            document.getElementById("url").innerHTML = $url;
-            window.open($url);
+            url = subjectUrl+"?id=1";
+            document.getElementById("url").innerHTML = url;
+            window.open(url);
         }
         function nextSubject() {
-            $url = subjectUrl+"?id=2";
-            document.getElementById("url").innerHTML = $url;
-            window.open($url);
+            url = subjectUrl+"?id=27";
+            document.getElementById("url").innerHTML = url;
+            window.open(url);
         }
         function allSubjects() {
             document.getElementById("url").innerHTML = subjectUrl;
@@ -31,14 +31,14 @@
 
         // level functions
         function firstLevel() {
-            $url = levelUrl+"?id=1";
-            document.getElementById("url").innerHTML = $url;
-            window.open($url);
+            url = levelUrl+"?id=1";
+            document.getElementById("url").innerHTML = url;
+            window.open(url);
         }
         function nextLevel() {
-            $url = levelUrl+"?id=2";
-            document.getElementById("url").innerHTML = $url;
-            window.open($url);
+            url = levelUrl+"?id=2";
+            document.getElementById("url").innerHTML = url;
+            window.open(url);
         }
         function allLevels() {
             document.getElementById("url").innerHTML = levelUrl;
@@ -47,28 +47,28 @@
 
         // question functions
         function firstQuestion() {
-            $url = questionUrl+"?level=1";
-            document.getElementById("url").innerHTML = $url;
-            window.open($url);
+            url = questionUrl+"?level=1";
+            document.getElementById("url").innerHTML = url;
+            window.open(url);
         }
         function nextQuestion() {
-            $url = questionUrl+"?level=2";
-            document.getElementById("url").innerHTML = $url;
-            window.open($url);
+            url = questionUrl+"?level=2";
+            document.getElementById("url").innerHTML = url;
+            window.open(url);
         }
         function allQuestions() {
             document.getElementById("url").innerHTML = questionUrl;
             window.open(questionUrl);
         }
         function subjectQuestion() {
-            $url = questionUrl+"?subject=1";
-            document.getElementById("url").innerHTML = $url;
-            window.open($url);
+            url = questionUrl+"?subject=1";
+            document.getElementById("url").innerHTML = url;
+            window.open(url);
         }
         function subjectLevelQuestion() {
-            $url = questionUrl+"?subject=1&level=2";
-            document.getElementById("url").innerHTML = $url;
-            window.open($url);
+            url = questionUrl+"?subject=1&level=2";
+            document.getElementById("url").innerHTML = url;
+            window.open(url);
         }
     </script>
 </head>
@@ -97,6 +97,8 @@
     <button onclick="subjectLevelQuestion()">alle Fragen Thema 1 Level 2(subject=1, level=2)</button>
 
     <p>A function is triggered when the button is clicked.</p>
+
+    <a href="apimode.html">API-Testseite</a>
 </body>
 
 </html>
