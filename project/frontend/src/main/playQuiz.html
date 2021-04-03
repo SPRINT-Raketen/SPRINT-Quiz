@@ -78,13 +78,17 @@
                     subjectId                                           =   parsedJSON.subject.id;
                     document.getElementById("subjectText").innerHTML    =   parsedJSON.subject.text;
                     document.getElementById("question_text").innerHTML  =   parsedJSON.question;
-                    document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
+                    //document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
+                    $("#" + id1).text(parsedJSON.answers[0].text);
                     feedback_a                                          =   parsedJSON.answers[0].Feedback;
-                    document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
+                    //document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
+                    $("#" + id2).text(parsedJSON.answers[1].text);
                     feedback_b                                          =   parsedJSON.answers[1].Feedback;
-                    document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
+                    //document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
+                    $("#" + id3).text(parsedJSON.answers[2].text);
                     feedback_c                                          =   parsedJSON.answers[2].Feedback;
-                    document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
+                    //document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
+                    $("#" + id4).text(parsedJSON.answers[3].text);
                     feedback_d                                          =   parsedJSON.answers[3].Feedback;
                 })
             }
@@ -250,6 +254,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-9">
                 <button class="btn btn-dark .btn-circle.btn-xl" type="button" id="continue" style="display:none" onclick="
+                    shuffleAnswers();
                     showQuestion();
                     selectAnswer(document.getElementById('answers_a'));
                     selectAnswer(document.getElementById('answers_b'));
@@ -261,12 +266,13 @@
         </div>
         <!--Anzeige Quiz starten; erscheint nur auf 1. Seite-->
         <p><button class="display-1" id="startQuiz" style="display:block" onclick="
-                        show(document.getElementById('subject_line'));
-                        show(document.getElementById('result'));
-                        show(document.getElementById('quiz1'));
-                        showQuestion();
-                        hide(document.getElementById('image'));
-                        hide(document.getElementById('startQuiz'))">Quiz starten</button></p>       
+            show(document.getElementById('subject_line'));
+            show(document.getElementById('result'));
+            show(document.getElementById('quiz1'));
+            shuffleAnswers();
+            showQuestion();
+            hide(document.getElementById('image'));
+            hide(document.getElementById('startQuiz'))">Quiz starten</button></p>       
         <p> </p>
         <!--Anzeige nächste Frage-->
         <p></p>

@@ -14,7 +14,7 @@ function getLastQuestion(){
 
 //für JSON-Array
 function getRightAnswer(){
-  var correctAnswer = currentQuestion.right;
+  var correctAnswer = shuffledAnswers[0]; //currentQuestion.right;
   return correctAnswer;
 }
 
@@ -23,7 +23,7 @@ function getLastQuestion(){
   return lastQuestion;
 }
 
-/*
+/* Anzeige der Fragen mit einem JavaScript-Array
 let fragen = [
   ['1', 'Was macht man mit einer Programmiersprache?', 'Wandern', 'Kochen', 'Programmieren', 'Zeichnen', 'C',
     '50', '1', 'Programming','10', 'falsch', 'komplett falsch','Kompliment','eher falsch'],
@@ -63,13 +63,13 @@ function isAnswerRight(solution){
 
 //zeigt Text an, je nachdem ob Antwort richtig oder falsch war
 function checkAnswer(solution) { 
-  if (solution.value == getRightAnswer()) {
+  if (isAnswerRight(solution)) {
     //alert("your answer is correct: " + solution.value);
     show(document.getElementById('correct_answer'));
     show(document.getElementById('continue'))
     if (currentQuestionNo == getLastQuestion()-1){
       //alert("Wow, du hast es geschafft!!");
-      setTimeout("windowLocation()", 4000);
+      setTimeout("windowLocation()", 2000);
       //window.location.href="congratulation.html";
     }
  } else {
@@ -119,17 +119,17 @@ var questions = [
     },
     "question" : "Was macht man mit einer Programmiersprache?",
     "answers" : {
-      "A":"Wandern",
+      "A":"Programmieren",
       "B":"Kochen",
-      "C":"Programmieren",
+      "C":"Wandern",
       "D":"Zeichnen"
     }, 
     "right":"C",
     "feedback" : {
-      "A": "komplett falsch",
-      "B": "falsch",
-      "C": "Kompliment",
-      "D": "eher falsch"
+      "A": "Kompliment",
+      "B": "falsch! Schau das Kapitel zum Kochen nochmals an.",
+      "C": "falsch! Schau das Kapitel zum Wandern nochmals an.",
+      "D": "falsch! Schau das Kapitel zum Zeichnen nochmals an."
     }
   },{
     "id":"2",
@@ -151,10 +151,10 @@ var questions = [
     }, 
     "right":"A",
     "feedback" : {
-      "A": "Kompliment",
-      "B": "falsch",
-      "C": "komplett falsch",
-      "D": "eher falsch"
+      "A": "Sehr gut? Bug hiesst übrigens Käfer.",
+      "B": "falsch! Ein Hat setzt man auf den Kopf",
+      "C": "fasch! Ein Pen ist ein Eingabegerät.",
+      "D": "eher falsch! Ein Code enhält die Programmbefehle ( und du kannst damit einen Bug programmieren."
     }
   },{
     "id":"3",
@@ -169,20 +169,21 @@ var questions = [
     },
     "question" : "Welches ist keine Browser-Software?",
     "answers" : {
-      "A":"Firefox",
+      "A":"Iron",
       "B":"Chrome",
       "C":"Edge",
-      "D":"Iron"
+      "D":"Firefox"
     }, 
     "right":"D",
     "feedback" : {
-      "A": "eher falsch",
-      "B": "falsch",
-      "C": "komplett falsch",
-      "D": "Kompliment"
+      "A": "richtig! The product was named Chrome as an initial development project code name, because it is associated with fast cars and speed.ome",
+      "B": "falsch! Chrome ist ein Browser",
+      "C": "falsch! Edge ist ein Browser",
+      "D": "falsch! Firefox ist ein Browser"
     }
   }
 ];
+
 
 
 var currentQuestionNo = -1;
@@ -200,15 +201,42 @@ function showQuestion() {
   $("#subjectId").text(currentQuestion.subject.id);
   $("#subjectText").text(currentQuestion.subject.text);
   $("#question_text").text(currentQuestion.question);
-  $("#answer_a").text(currentQuestion.answers.A);
+  $("#" + id1).text(currentQuestion.answers.A);
+  $("#" + id2).text(currentQuestion.answers.B);
+  $("#" + id3).text(currentQuestion.answers.C);
+  $("#" + id4).text(currentQuestion.answers.D);
+  /*$("#answer_a").text(currentQuestion.answers.A);
   $("#answer_b").text(currentQuestion.answers.B);
   $("#answer_c").text(currentQuestion.answers.C);
   $("#answer_d").text(currentQuestion.answers.D);
-  /*$("#feedback_a").text(currentQuestion.feedback.A);
+  $("#feedback_a").text(currentQuestion.feedback.A);
   $("#feedback_b").text(currentQuestion.feedback.B);
   $("#feedback_c").text(currentQuestion.feedback.C);
   $("#feedback_d").text(currentQuestion.feedback.D);*/
-
 }
+
+var shuffledAnswers = ['A', 'B', 'C', 'D'];
+var id1;
+var id2;
+var id3;
+var id4; 
+
+function shuffleAnswers(){
+  console.log("Before Shuffle1: " + shuffledAnswers);
+  shuffledAnswers.sort();
+  shuffleArray(shuffledAnswers);
+  id1 = "answer_" + shuffledAnswers[0].toLowerCase();
+  id2 = "answer_" + shuffledAnswers[1].toLowerCase();
+  id3 = "answer_" + shuffledAnswers[2].toLowerCase();
+  id4 = "answer_" + shuffledAnswers[3].toLowerCase();
+}
+
+
+
+function shuffleArray(inputArray){
+   inputArray.sort(()=> Math.random() - 0.5);
+   console.log("After Shuffle2: " + inputArray);
+}
+
 
 
