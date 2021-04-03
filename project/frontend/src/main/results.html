@@ -6,7 +6,7 @@
         <title>SPRINT-Quiz</title>
         <link rel = "stylesheet" href = "css/style.css">
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="media/favicon.ico">
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -21,23 +21,30 @@
     </head>
 
     <body>
-        <div id="textboxQuitGame">
-            <h1 class="text-white"><p></p>Leider ist das Quiz für Dich hier zu Ende.</p>
-            <p>Du hast xxx Punkte erreicht!</p></h1>
-            <h2 class="text-white">Mit <strong>«Neues Quiz»</strong> kannst du es nochmals versuchen.</h2>
+        <div class="row">
+            <div class="col-md-1"> </div>
+            <div class="col-md-11">
+                <img src = "media/millionen-quiz.png" width = "200" height="191" alt = "SPRINT-Quiz" style="display:block" class="text-center">
+            </div>
         </div>
-
-        <img src = "millionen-quiz.png" width = "200" height="191" alt = "SPRINT-Quiz">
-        <p></p>
-        
+            
+        <div class="row" id="textboxQuitGame">
+            <div class="col-md-1"> </div>
+            <div class="col-md-11">
+                <h1 class="text-white"><p></p>Leider ist das Quiz für Dich hier zu Ende.</p>
+                <p>Du hast <span id="levelValue">Betrag</span> Punkte erreicht!</p></h1>
+            </div>
+            <!--<h2 class="text-white">Mit <a href = "playQuiz.html" class="btn btn-dark .btn-circle.btn-xl">Neues Quiz</a> kannst du es nochmals versuchen.</h2>-->
+        </div>
+       
         <p> </p>
 
         <!--Möglichkeit, neues Quiz zu starten nach einem Fehlversuch-->
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-9">
+            <div class="col-md-1"> </div>
+            <div class="col-md-11">
                 <button class="btn btn-dark .btn-circle.btn-xl" id="newQuiz">                                            
-                <a href = "playQuiz.html">Neues Quiz</button></div>      
+                <a href = "playQuiz.html"><h4>Neues Quiz</h4></button></div>      
         </div>
 
         <!--<button><a href = "playQuiz.html" title ="Start Page">Zur Startseite zurück</a></button>-->
