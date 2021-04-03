@@ -79,6 +79,7 @@ function checkAnswer(solution) {
     show(document.getElementById('newQuiz'))
     //window.location.href="results.html";
  }
+ getFeedbackText(solution);
  //$('input:checked').removeAttr('checked');
 }
 
@@ -86,25 +87,7 @@ function windowLocation(){
   window.location.href="congratulation.html";
 }
 
-
-/*function getFeedbackText(solution){
-  if (solution.value == 'A' ){
-    $("#feedback").text(currentQuestion.feedback.A);
-  }
-  if (solution.value == 'B' ){
-    $("#feedback").text(currentQuestion.feedback.B);
-  }
-  if (solution.value == 'C' ){
-    $("#feedback").text(currentQuestion.feedback.C);
-  }
-  if (solution.value == 'D' ){
-    $("#feedback").text(currentQuestion.feedback.D);
-    }
-  alert("getFeedbackText"+solution.value);
-  show(document.getElementById('feedback'));
-}*/
-
-
+//Array im Json-Format zum internen Testen
 var questions = [
   {
     "id":"1",
@@ -126,10 +109,10 @@ var questions = [
     }, 
     "right":"C",
     "feedback" : {
-      "A": "Kompliment",
-      "B": "falsch! Schau das Kapitel zum Kochen nochmals an.",
-      "C": "falsch! Schau das Kapitel zum Wandern nochmals an.",
-      "D": "falsch! Schau das Kapitel zum Zeichnen nochmals an."
+      "A": "Kompliment. Du hast gute Voraussetzungen, ein Programmierer zu werden.",
+      "B": "Leider Falsch! Schau das Kapitel zum Kochen nochmals an.",
+      "C": "Leider Falsch! Schau das Kapitel zum Wandern nochmals an.",
+      "D": "Leider Falsch! Schau das Kapitel zum Zeichnen nochmals an."
     }
   },{
     "id":"2",
@@ -151,10 +134,10 @@ var questions = [
     }, 
     "right":"A",
     "feedback" : {
-      "A": "Sehr gut? Bug hiesst übrigens Käfer.",
-      "B": "falsch! Ein Hat setzt man auf den Kopf",
-      "C": "fasch! Ein Pen ist ein Eingabegerät.",
-      "D": "eher falsch! Ein Code enhält die Programmbefehle ( und du kannst damit einen Bug programmieren."
+      "A": "Sehr gut! Bug hiesst übrigens Käfer.",
+      "B": "Leider Falsch! Ein Hat setzt man auf den Kopf",
+      "C": "Leider Falsch! Ein Pen ist ein Eingabegerät.",
+      "D": "Leider falsch! Ein Code enhält Programmbefehle (und du kannst damit einen Bug programmieren)."
     }
   },{
     "id":"3",
@@ -176,10 +159,10 @@ var questions = [
     }, 
     "right":"D",
     "feedback" : {
-      "A": "richtig! The product was named Chrome as an initial development project code name, because it is associated with fast cars and speed.ome",
-      "B": "falsch! Chrome ist ein Browser",
-      "C": "falsch! Edge ist ein Browser",
-      "D": "falsch! Firefox ist ein Browser"
+      "A": "Richtig! Iron is a metal. Chrome is a browser.",
+      "B": "Leider falsch! Chrome ist ein Browser",
+      "C": "Leider falsch! Edge ist ein Browser",
+      "D": "Leider falsch! Firefox ist ein Browser"
     }
   }
 ];
@@ -215,14 +198,16 @@ function showQuestion() {
   $("#feedback_d").text(currentQuestion.feedback.D);*/
 }
 
+//Deklaration der Variablen zum Vertauschen der Antworten
 var shuffledAnswers = ['A', 'B', 'C', 'D'];
 var id1;
 var id2;
 var id3;
 var id4; 
 
+//Antworten auf die 4 verschiedenen Positionen zufällig verteilen
 function shuffleAnswers(){
-  console.log("Before Shuffle1: " + shuffledAnswers);
+  //console.log("Before Shuffle1: " + shuffledAnswers);
   shuffledAnswers.sort();
   shuffleArray(shuffledAnswers);
   id1 = "answer_" + shuffledAnswers[0].toLowerCase();
@@ -231,11 +216,32 @@ function shuffleAnswers(){
   id4 = "answer_" + shuffledAnswers[3].toLowerCase();
 }
 
-
-
+//Funktion zum zufälligen Sortieren eines Arrays
 function shuffleArray(inputArray){
    inputArray.sort(()=> Math.random() - 0.5);
-   console.log("After Shuffle2: " + inputArray);
+   //console.log("After Shuffle2: " + inputArray);
+}
+
+//Funktion um die Feedbacks aufgrund des zufälligen Sortierens korrekt zuzuweisen
+function getFeedbackText(solution){
+  if (solution.value == shuffledAnswers[0] ){
+    $(".feedbacks").text(currentQuestion.feedback.A); //Json aus quiz.js
+    $(".feedbacks").text(feedback_a); //ParsedJson
+  }
+  if (solution.value == shuffledAnswers[1] ){
+    $(".feedbacks").text(currentQuestion.feedback.B); //Json aus quiz.js
+    $(".feedbacks").text(feedback_b); //ParsedJson
+  }
+  if (solution.value == shuffledAnswers[2] ){
+    $(".feedbacks").text(currentQuestion.feedback.C); //Json aus quiz.js
+    $(".feedbacks").text(feedback_c); //ParsedJson
+  }
+  if (solution.value == shuffledAnswers[3]){
+    $(".feedbacks").text(currentQuestion.feedback.D); //Json aus quiz.js
+    $(".feedbacks").text(feedback_d); //ParsedJson
+    }
+  //alert("getFeedbackText"+solution.value);
+  show(document.getElementById('feedback'));
 }
 
 
