@@ -69,6 +69,7 @@ function checkAnswer(solution) {
     show(document.getElementById('continue'))
     if (currentQuestionNo == getLastQuestion()-1){
       //alert("Wow, du hast es geschafft!!");
+      hide(document.getElementById('continue'));
       setTimeout("windowLocation()", 2000);
       //window.location.href="congratulation.html";
     }
@@ -164,8 +165,32 @@ var questions = [
       "C": "Leider falsch! Edge ist ein Browser",
       "D": "Leider falsch! Firefox ist ein Browser"
     }
-  }
-];
+  },{
+    "id":"4",
+    "level" : {
+      "id":"4",
+      "value":"400",
+      "text":"CHF"
+    },
+    "subject" : {
+      "id":"4",
+      "text":"Englisch"
+    },
+    "question" : "Wie nennt man ein Textverarbeitungsprogramm?",
+    "answers" : {
+      "A": "Word ist ein Textverarbeitungsprogramm",
+      "B": "OneNote",
+      "C": "Murks ist eines der bekanntesten Textverarbeitungsprogramm",
+      "D": "Knorz ist ein Textverarbeitungsprogramm"
+    },
+    "right": "A",
+    "feedback":{
+      "A": "Stimmt. Word ist in der Office-Palette enthalten",
+      "B": "Leider falsch! OneNote ist ein Notizprogramm. Die richtige Antwort ist Word.",
+      "C": "Leider falsch. Die richtige Antwort ist Word",
+      "D": "Leider falsch. Die richtige Antwort ist Word",
+    }
+  }];
 
 
 
