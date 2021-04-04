@@ -272,8 +272,16 @@
             shuffleAnswers();
             showQuestion();
             hide(document.getElementById('image'));
+            hide(document.getElementById('impressum'));
             hide(document.getElementById('startQuiz'))">Quiz starten</button></p>       
         <p> </p>
+        
+        <!--Anzeige Impressmum; erscheint nur auf 1. Seite-->
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-dark" id="impressum" style="display:block">                                            
+                <a href = "impressum.html">Impressum</button></div>      
+        </div>
         <!--Anzeige nächste Frage-->
         <p></p>
         <p><button id="continue" style="display:none" onclick="

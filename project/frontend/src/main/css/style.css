@@ -3,7 +3,7 @@ body{padding-top: 70px;
 }
 
 a {
-  color:rgb(107, 130, 167);
+  color:rgb(255, 255, 255);
 }
 
 .btn-circle.btn-xl {
@@ -14,3 +14,7 @@ a {
   line-height: 1.33;
   border-radius: 35px;
 }
+
+a:hover{background: rgb(116, 116, 170)}
+a:active{background: rgb(151, 176, 199)}
+

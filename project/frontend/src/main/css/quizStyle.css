@@ -1,4 +1,4 @@
-body {
+/*body {
     background-image: linear-gradient(to right, rgb(93, 148, 184), rgb(95, 125, 182), blue);
     font-size: large;
 }
@@ -6,7 +6,7 @@ body {
 h1 {color: rgb(29, 6, 6)}
 
 a {
-    color:rgb(38, 14, 173);
+    color:rgb(255, 255, 255);
 }
 
 h2{
@@ -19,13 +19,13 @@ h2{
 }
 
 a:hover{background: rgb(116, 116, 170)}
-a:active{background: green}
+a:active{background: rgb(151, 176, 199)}
 
 
 
 input{
     padding: 10px;
-}
+}*/
 
 
 
