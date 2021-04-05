@@ -144,6 +144,15 @@
                 displayCurrentJSON_URL ();
                 //buildAPIrequest (levelId, subject);
             }
+
+            //Markus 05.04.21: (hoffentlich) finale Version des REST-API-requests. (Was hier nicht aufgerufen wird, ist überflüssig.)
+            function getNewQuestion (levelId, subject){
+                //buildAPIrequest (levelId, subject);
+                json_obj_global= getJSON();
+                //parsedJSON_global=parseJSON (json_obj_global);
+                //parsedJSON_global=cleanJSON (parsedJSON_global);
+                //distributeJSONcontent(parsedJSON_global);
+            }
         </script>
         
         <script src="js/quiz.js"></script>
@@ -282,6 +291,12 @@
             <div class="col-md-1"></div>
             <div class="col-md-9">
                 <button class="btn btn-dark .btn-circle.btn-xl" type="button" id="continue" style="display:none" onclick="
+                    /* 
+                    05.04.21: Ergänzung von Markus: 
+                    Klick auf 'zur nächsten Frage' soll im Hintergrund REST-API-request auslösen
+                    */
+                   //function getNewQuestion (levelId, subject);
+                    
                     deselectLevel();
                     selectLevel();
                     shuffleAnswers();
