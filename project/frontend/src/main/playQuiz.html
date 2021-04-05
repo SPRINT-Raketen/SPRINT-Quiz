@@ -38,16 +38,11 @@
                 var baseURL = "http://localhost:8081/sprintquiz/api/questions/question.php";
                 var APIcommand = "GET "; //GET ist eh default bei fetch(). Da ich vom frontend her nur GET brauche, kann ich das weglassen
                 var endpointLevel;
-                var endpointSubject;
+                var endpointSubject=subject;
 
                 level = Number(level);
+                endpointLevel=level;
 
-                endpointLevel=level + 1;
-                endpointSubject=subject;
-
-                /*request-url mergen
-                Vorlage aus pdf: GET http://localhost:8081/sprintquiz/api/questions/question.php?level=9
-                */
                 json_url=baseURL+"?level="+endpointLevel+"&subject="+endpointSubject;
                 
                 //return json_url; //Braucht es eigentlich nicht, da eh direkt in globaler Variable abgespeichert wird.
@@ -127,28 +122,41 @@
                     var feedback_d                                      =   parsedJSON.answers[3].Feedback;
             }
 
-            function displayCurrentJSON_URL (){
-                document.getElementById("json_url_DISPLAY").innerHTML       =   json_url;
-            }
-
-            //alle Schritte zusammen ausführen (neues JSON requesten, dessen Inhalte auf Variablen verteilen)
-            function showNewQuestion (){
-                //buildAPIrequest (levelId, subject);
-                json_obj_global= getJSON();
-                //parsedJSON_global=parseJSON (json_obj_global);
-                //parsedJSON_global=cleanJSON (parsedJSON_global);
-                //distributeJSONcontent(parsedJSON_global);
-            }
-
-            function generateAndShowNextJSON_URL (levelId, subject){
-                var blabla=levelId;
-                var blublu=subject;
-                displayCurrentJSON_URL ();
-                buildAPIrequest (blabla, blublu);
-            }
-
             //Markus 05.04.21: (hoffentlich) finale Version des REST-API-requests. (Was hier nicht aufgerufen wird, ist überflüssig.)
             function getNewQuestion (levelId, subject){
+                /*
+                Markus 05.04.21: +1, damit nicht vom gleichen, sondern vom nächsthöheren Level Fragen requestet werden.
+                Nur nötig, wenn +1 nirgends sonst gemacht wird (Am Besten wäre direkt nach korrektem Beantworten)!
+                */
+                levelId++;
+
+                buildAPIrequest (levelId, subject);
+                json_obj_global= getJSON();
+
+                //Markus 05.04.21: folgende Funktionen sind nicht notwendig, nur für visuellen Check/Test
+                displayCurrentValues ();
+                forceJSONcontentOntoScreen ();
+            }
+
+            //Markus 05.04.21: nur eine Testfunktion. Kann gelöscht werden wenn alles läuft
+            function forceJSONcontentOntoScreen (){
+                levelId                                             =   parsedJSON.level.id;
+                document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
+                document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
+                document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
+                document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
+            }
+
+            //Markus 05.04.21: nur eine Testfunktion. Kann gelöscht werden wenn alles läuft
+            function displayCurrentValues (){
+                document.getElementById("json_url_DISPLAY").innerHTML       =   json_url;
+                document.getElementById("Platzhalter_subject").innerHTML       =   subject;
+                document.getElementById("Platzhalter_levelId").innerHTML       =   levelId;
+            }
+
+            //Markus 05.04.21: wahrscheinlich überflüssig, da in getNewQuestion () schlanker gebaut
+            //alle Schritte zusammen ausführen (neues JSON requesten, dessen Inhalte auf Variablen verteilen)
+            function showNewQuestion (){
                 //buildAPIrequest (levelId, subject);
                 json_obj_global= getJSON();
                 //parsedJSON_global=parseJSON (json_obj_global);
@@ -267,6 +275,18 @@
                 <h4 id="json_url_DISPLAY" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter Anzeige link REST API request</h3>
                 <div class="col-md-2"></div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <h4 id="Platzhalter_levelId" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter_levelId</h3>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <h4 id="Platzhalter_subject" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter_subject</h3>
+                    <div class="col-md-2"></div>
+                </div>
                 <!-- Ende Ergänzung von Markus. --> 
 
             </form>
@@ -342,14 +362,9 @@
         
         <!-- Ergänzung von Markus --> 
         <p></p>
-        <button onclick="showNewQuestion ()">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
+        <button onclick="getNewQuestion (levelId, subject)">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
         <p></p>
         <!--<section id="result" style="display:none">-->
-        <p></p>
-        <button onclick="generateAndShowNextJSON_URL (levelId, subject)">URL zur nächsten Frage anzeigen</button> <p></p>
-        <p></p>
-        
-        <!--<section id="result" style="display: none">
 
         <button><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></body></button> <p></p>
         </section>
