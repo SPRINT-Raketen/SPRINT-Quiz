@@ -16,6 +16,12 @@
 
         <script src="js/script.js"></script>
         <script src="js/quiz.js"></script>
+        
+        <script>
+            function showPoints (){
+                document.getElementById("points").innerHTML  =   value;
+            }
+        </script>
 
     </head>
 
@@ -45,6 +51,11 @@
                 <button class="btn btn-dark .btn-circle.btn-xl" id="newQuiz">                                            
                 <a href = "playQuiz.html"><h4>Neues Quiz</h4></button></div>      
         </div>
+
+        <!-- 05.04.21 Markus : Button zu Testzwecken. Kann gelöscht werden wenn alles läuft  --> 
+        <p></p>
+        <button onclick="showPoints ()">Punktestand</button> <p></p>
+        <p></p>
 
         <!--<button><a href = "playQuiz.html" title ="Start Page">Zur Startseite zurück</a></button>-->
 

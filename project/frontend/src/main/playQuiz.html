@@ -23,7 +23,7 @@
             var levelId=0; //0=Startwert
             var value;    //entspricht Wert einer Frage -> nötig für Punkte bei Ausstieg
             var levelText;
-            var subject="Informatik"; //"Informatik"=default-Wert. Eigentlich sollte das über die Einladung gemacht werden. Stand 22.03
+            var subject;
             var subjectId; 
             var feedback_a;
             var feedback_b;
@@ -31,43 +31,46 @@
             var feedback_d; 
 
             //generiert Anfrage an API mit Parametern Level & subject
-            function buildAPIrequest (level, subject) {
-                var baseURL = "http://localhost:8081/sprintquiz/api/questions/question.php";
+            function buildAPIrequest (level, subjectId) {
+                var baseURL = "http://localhost:80/sprintquiz/api/questions/question.php";
                 var APIcommand = "GET "; //GET ist eh default bei fetch(). Da ich vom frontend her nur GET brauche, kann ich das weglassen
                 var endpointLevel;
-                var endpointSubject=subject;
+                var endpointSubjectId=1; //Vorläufig per default "1", weil nur Fragen aus der Kategorie 1 (="Allgemein") bestehen
 
                 level = Number(level);
                 endpointLevel=level;
 
-                json_url=baseURL+"?level="+endpointLevel+"&subject="+endpointSubject;
+                json_url=baseURL+"?level="+endpointLevel+"&subject="+endpointSubjectId;
 
-                //05.04.21 Markus: untenstehendes zu Testzwecken
-                //json_url="http://localhost:8080/sprintquiz/api/questions/question.php?level=1&subject=1";
-                
             }
 
             //holt JSON-Objekt ab (vorläufig auf GitHub, später beim API)
             function getJSON (){
+                console.log ("getJSON: "+json_url);
                 fetch(json_url)
                 .then(response => {
                     if (response.status === 200) {    // okay
                         const json_obj = response.json();   // consume json, only once possible!
-                        console.log("json to var - return now");
                         return json_obj;    // return consumed json to second .then() 
                     } else {    // nok, so print error
                         alert(response.status.toString() + ": " + response.statusText);
                     }
                 })
 
-                //Diesen Teil will ich eigentlich in parseJSON und distributeJSONcontent auslagern, klappt aber noch nicht.
                 .then(myJson => { // lambda to manage consumed jso
                     var parsedJSON = myJson; 
 
-                    //erstes und letztes Zeichen (-> []) entfernen
-                    parsedJSON = cleanJSON (parsedJSON);
+                    //05.04.21 Markus: Zur Kontrolle im browser
+                    console.log ("Anzahl Datensätze: "+myJson.length);
 
-                    //Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
+                    //05.04.21 Markus: Wenn mehrere passende Fragen angeboten werden, wird per Zufall ausgewählt
+                    var index = Math.floor((Math.random())*myJson.length);
+                    parsedJSON = myJson [index];
+
+                    //05.04.21 Markus: Zur Kontrolle im browser
+                    console.log (JSON.stringify(parsedJSON));
+
+                    //07.03.21 Markus: Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
                     questionId                                          =   parsedJSON.id;
                     levelId                                             =   parsedJSON.level.id;
                     value                                               =   parsedJSON.level.value;
@@ -76,30 +79,17 @@
                     document.getElementById("subjectText").innerHTML    =   parsedJSON.subject.text;
                     document.getElementById("question_text").innerHTML  =   parsedJSON.question;
                     $("#" + id1).text(parsedJSON.answers[0].text);
-                    feedback_a                                          =   parsedJSON.answers[0].Feedback;
+                    feedback_a                                          =   parsedJSON.answers[0].feedback;
                     $("#" + id2).text(parsedJSON.answers[1].text);
-                    feedback_b                                          =   parsedJSON.answers[1].Feedback;
+                    feedback_b                                          =   parsedJSON.answers[1].feedback;
                     $("#" + id3).text(parsedJSON.answers[2].text);
-                    feedback_c                                          =   parsedJSON.answers[2].Feedback;
+                    feedback_c                                          =   parsedJSON.answers[2].feedback;
                     $("#" + id4).text(parsedJSON.answers[3].text);
-                    feedback_d                                          =   parsedJSON.answers[3].Feedback;
+                    feedback_d                                          =   parsedJSON.answers[3].feedback;
                 })
             }
-
-            //schnippelt die eckigen Klammern aus JSON weg
-            function cleanJSON (parsedJSON) {
-                //1. Aus var parsedJSON ein String machen
-                var JSONstring = JSON.stringify(parsedJSON);
-
-                //2. via Substring erstes und letztes Zeichen entfernen
-                var JSONLength = JSONstring.length; //JSONlenght soll die Länge aller Zeichen im JSON erfassen
-                var cleanendJSONstring = JSONstring.substring(1, JSONLength-1); //Erster Parameter: exclusiv, zweiter Parameter: inclusiv
-                
-                //3. den nicht-abgeschnittenen Rest wieder in ein JSON verwandeln& zurückgeben
-                return JSON.parse(cleanendJSONstring);
-            }
         
-            //Markus 05.04.21: finale Version des REST-API-requests. (Was hier nicht aufgerufen wird, ist überflüssig.)
+            //REST-API-requests generieren.
             function getNewQuestion (levelId, subject){
                 /*
                 Markus 05.04.21: +1, damit nicht vom gleichen, sondern vom nächsthöheren Level Fragen requestet werden.
@@ -120,51 +110,6 @@
                 document.getElementById("Platzhalter_subject").innerHTML=   subject;
                 document.getElementById("Platzhalter_levelId").innerHTML=   levelId;
             }
-
-            //Markus 05.04.21: wahrscheinlich überflüssig, da in getNewQuestion () schlanker gebaut
-            //alle Schritte zusammen ausführen (neues JSON requesten, dessen Inhalte auf Variablen verteilen)
-            function showNewQuestion (){
-                //buildAPIrequest (levelId, subject);
-                json_obj_global= getJSON();
-                //parsedJSON_global=parseJSON (json_obj_global);
-                //parsedJSON_global=cleanJSON (parsedJSON_global);
-                //distributeJSONcontent(parsedJSON_global);
-            }
-
-            //Markus 05.04.21: wahrscheinlich überflüssig
-            //JSON parsen
-            function parseJSON (json_obj){
-                document.getElementById("answer3").innerHTML    = "parseJSON: VOR parse"; //nur zur Kontrolle
-                var parsedJSON_lokal = JSON.parse(json_obj);
-                document.getElementById("answer4").innerHTML    = "parseJSON: NACH parse"; //nur zur Kontrolle
-                return parsedJSON_lokal;
-            }
-
-            //Markus 05.04.21: wahrscheinlich überflüssig
-            //JSON-Inhalte auf verschiedene Felder verteilen
-            function distributeJSONcontent (parsedJSON){
-                    //Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
-                    var questionId                                      =   parsedJSON.id;
-                    var levelId                                         =   parsedJSON.level.id;
-                    document.getElementById("level").innerHTML          =   levelId;
-                    var value                                           =   parsedJSON.level.value;
-                    var levelText                                       =   parsedJSON.level.text;
-                    var subjectId                                       =   parsedJSON.subject.id;
-                    document.getElementById("subjectText").innerHTML    =   parsedJSON.subject.text;
-                    document.getElementById("question_text").innerHTML  =   parsedJSON.question;
-                    document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
-                    var feedback_a                                      =   parsedJSON.answers[0].Feedback;
-                    document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
-                    var feedback_b                                      =   parsedJSON.answers[1].Feedback;
-                    document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
-                    var feedback_c                                      =   parsedJSON.answers[2].Feedback;
-                    document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
-                    var feedback_d                                      =   parsedJSON.answers[3].Feedback;
-            }
-
-            //Markus 05.04.21: wahrscheinlich überflüssig
-            var json_obj_global; //Zwischenspeicher um JSON von getJSON() an parseJSON () zu übergeben
-            var parsedJSON_global; //Zwischenspeicher um parsedJSON von parseJSON () an distributeJSONcontent ()  zu übergeben
         </script>
         
         <script src="js/quiz.js"></script>
@@ -272,12 +217,16 @@
                 </div>
                 
                 <!-- Start Ergänzung von Markus. Stand 24.04. Zum Test des REST API. Kann gelöscht werden. --> 
+                <p></p>
+                <button onclick="getNewQuestion (levelId, subject)">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
+                <p></p>
+                
                 <div class="row">
-                <div class="col-md-1"></div>
-                <h4 id="json_url_DISPLAY" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter Anzeige link REST API request</h3>
-                <div class="col-md-2"></div>
-                </div>
-
+                    <div class="col-md-1"></div>  
+                    <h4 id="json_url_DISPLAY" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter Anzeige link REST API request</h3> 
+                    <div class="col-md-2"></div>
+                </div> 
+                
                 <div class="row">
                     <div class="col-md-1"></div>
                     <h4 id="Platzhalter_levelId" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter_levelId</h3>
@@ -289,8 +238,7 @@
                     <h4 id="Platzhalter_subject" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter_subject</h3>
                     <div class="col-md-2"></div>
                 </div>
-                <!-- Ende Ergänzung von Markus. --> 
-
+                <!-- Ende Ergänzung von Markus. -->
             </form>
         </section>
         <p></p>
@@ -319,7 +267,7 @@
                     05.04.21: Ergänzung von Markus: 
                     Klick auf 'zur nächsten Frage' soll im Hintergrund REST-API-request auslösen
                     */
-                   //function getNewQuestion (levelId, subject);
+                    getNewQuestion (levelId, subject);
                     
                     deselectLevel();
                     selectLevel();
@@ -338,6 +286,10 @@
             show(document.getElementById('subject_line'));
             show(document.getElementById('result'));
             show(document.getElementById('quiz1'));
+
+            //05.04.21 Markus: Klick auf 'zur nächsten Frage' soll im Hintergrund REST-API-request auslösen
+            getNewQuestion (levelId, subject);
+
             selectLevel();
             shuffleAnswers();
             showQuestion();
@@ -362,17 +314,12 @@
         <p> </p>-->
         <!--<button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>-->
         
-        <!-- 05.04.21 Markus : Button zu Testzwecken. Kann gelöscht werden wenn alles läuft  --> 
-        <p></p>
-        <button onclick="getNewQuestion (levelId, subject)">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
-        <p></p>
-        <!--<section id="result" style="display:none">-->
-
+        <p> </p>
         <button><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></body></button> <p></p>
         </section>
         <section id="congratulation" style="display:none">
         <button><a href = "congratulation.html" title ="Anzeige bei erfolgreichen Abschluss des Quiz">Gratulationsbildschirm</a></body></button>
-        </section>-->
+        </section>
         <!--Möglichkeit, das Resultat anzuschauen und ein neues Quiz zu starten-->
         <div class="row">
             <div class="col-md-1"></div>
