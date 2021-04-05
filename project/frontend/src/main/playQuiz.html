@@ -50,7 +50,7 @@
                 */
                 json_url=baseURL+"?level="+endpointLevel+"&subject="+endpointSubject;
                 
-                return json_url; //Braucht es eigentlich nicht, da eh direkt in globaler Variable abgespeichert wird.
+                //return json_url; //Braucht es eigentlich nicht, da eh direkt in globaler Variable abgespeichert wird.
             }
 
             //holt JSON-Objekt ab (vorläufig auf GitHub, später beim API)
@@ -72,24 +72,26 @@
                     //Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
                     questionId                                          =   parsedJSON.id;
                     levelId                                             =   parsedJSON.level.id;
-                    //document.getElementById("level").innerHTML          =   levelId;
                     value                                               =   parsedJSON.level.value;
                     levelText                                           =   parsedJSON.level.text;
                     subjectId                                           =   parsedJSON.subject.id;
                     document.getElementById("subjectText").innerHTML    =   parsedJSON.subject.text;
                     document.getElementById("question_text").innerHTML  =   parsedJSON.question;
-                    //document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
                     $("#" + id1).text(parsedJSON.answers[0].text);
                     feedback_a                                          =   parsedJSON.answers[0].Feedback;
-                    //document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
                     $("#" + id2).text(parsedJSON.answers[1].text);
                     feedback_b                                          =   parsedJSON.answers[1].Feedback;
-                    //document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
                     $("#" + id3).text(parsedJSON.answers[2].text);
                     feedback_c                                          =   parsedJSON.answers[2].Feedback;
-                    //document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
                     $("#" + id4).text(parsedJSON.answers[3].text);
                     feedback_d                                          =   parsedJSON.answers[3].Feedback;
+
+                    //05.04.21 Markus: Befüllen der html-Textfelder von js aus. vermutl. überflüssig
+                        //document.getElementById("level").innerHTML          =   levelId;
+                        //document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
+                        //document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
+                        //document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
+                        //document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
                 })
             }
 
@@ -128,9 +130,10 @@
             function displayCurrentJSON_URL (){
                 document.getElementById("json_url_DISPLAY").innerHTML       =   json_url;
             }
-// tESTKOMMENTAR 2.4.21
-            //alle Schritte zusammen ausführen (neue Frage requesten, JSON aufnehmen, Inhalte anzeigen)
+
+            //alle Schritte zusammen ausführen (neues JSON requesten, dessen Inhalte auf Variablen verteilen)
             function showNewQuestion (){
+                //buildAPIrequest (levelId, subject);
                 json_obj_global= getJSON();
                 //parsedJSON_global=parseJSON (json_obj_global);
                 //parsedJSON_global=cleanJSON (parsedJSON_global);
