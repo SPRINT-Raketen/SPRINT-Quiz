@@ -1,9 +1,0 @@
-{
-    "id":0,
-    "comment2id": "comments werden in json nicht unterstützt...Hier wäre ein automatisches Prozedere zur Vergabe der id besser",
-    "level": 0, 
-    "comment2level": "hier wär' wohl ein Enum gut",
-    "subject": "dummyTest",
-    "question": "Wieviele Beine hat eine Katze?",
-    "answers": ["vier Beine", "3 Beine","7 Flügel","weiss nicht"]
-}

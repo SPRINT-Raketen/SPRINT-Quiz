@@ -7,6 +7,6 @@
     "subject": {"id": "15", "text": "Informatik"},
     "question": "Wobei handelt es sich nicht um eine Programmiersprache?",
     "answers": [{"text": "Linux", "Feedback": "korrekt"}, {"text": "TypeScript",
-    "Feedback": "leider falsch"}, {"text": "Java", "Feedback": "leider auch falsch"},
+    "Feedback": "leider falsch"}, {"text": "Java", "Feedback": "so doof"},
     {"text": "Python", "Feedback": "komplett falsch"}]
 }
