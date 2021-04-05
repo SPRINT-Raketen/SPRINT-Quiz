@@ -72,6 +72,12 @@ function checkAnswer(solution) {
       hide(document.getElementById('continue'));
       setTimeout("windowLocation()", 2000);
       //window.location.href="congratulation.html";
+
+      /* 
+      05.04.21: Ergänzung von Markus: 
+      setzt levelId um 1 rauf, damit request korrekt abläuft
+      */
+      //levelId=levelId+1;
     }
  } else {
     show(document.getElementById('false_answer')); 

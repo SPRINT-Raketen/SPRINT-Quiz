@@ -140,9 +140,11 @@
                 //distributeJSONcontent(parsedJSON_global);
             }
 
-            function generateAndShowNextJSON_URL (){
+            function generateAndShowNextJSON_URL (levelId, subject){
+                var blabla=levelId;
+                var blublu=subject;
                 displayCurrentJSON_URL ();
-                //buildAPIrequest (levelId, subject);
+                buildAPIrequest (blabla, blublu);
             }
 
             //Markus 05.04.21: (hoffentlich) finale Version des REST-API-requests. (Was hier nicht aufgerufen wird, ist überflüssig.)
@@ -344,7 +346,7 @@
         <p></p>
         <!--<section id="result" style="display:none">-->
         <p></p>
-        <button onclick="generateAndShowNextJSON_URL ()">URL zur nächsten Frage anzeigen</button> <p></p>
+        <button onclick="generateAndShowNextJSON_URL (levelId, subject)">URL zur nächsten Frage anzeigen</button> <p></p>
         <p></p>
         
         <!--<section id="result" style="display: none">
