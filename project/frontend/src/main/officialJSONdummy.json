@@ -1,3 +1,4 @@
+[
 {
     "id": "77",
     "level":
@@ -10,3 +11,4 @@
     "Feedback": "leider falsch"}, {"text": "Java", "Feedback": "doch nicht Java!"},
     {"text": "Python", "Feedback": "komplett falsch"}]
 }
+]
