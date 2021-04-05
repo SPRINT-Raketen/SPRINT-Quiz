@@ -65,3 +65,25 @@ function selectAnswer(id) {
   //alert("select"+id);
 }
 
+var counter = 1;
+
+function selectLevel() {
+  var levelCounter = "level"+counter;
+  console.log(levelCounter);
+  $("#"+levelCounter).removeClass("alert-warning");
+  $("#"+levelCounter).addClass("bg-warning");
+
+  //$("#button1").addClass("active");
+  //alert("select"+id);
+}
+
+function deselectLevel() {
+  var levelCounter = "level"+counter;
+  console.log(levelCounter);
+  $("#"+levelCounter).removeClass("bg-warning");
+  $("#"+levelCounter).addClass("alert-warning");
+  counter +=1;
+  //$("#button1").addClass("active");
+  //alert("select"+id);
+}
+

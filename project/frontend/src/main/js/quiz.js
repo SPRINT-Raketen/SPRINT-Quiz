@@ -144,7 +144,7 @@ var questions = [
     "id":"3",
     "level" : {
       "id":"3",
-      "value":"200",
+      "value":"1000",
       "text":"CHF"
     },
     "subject" : {
@@ -169,7 +169,7 @@ var questions = [
     "id":"4",
     "level" : {
       "id":"4",
-      "value":"400",
+      "value":"10 000",
       "text":"CHF"
     },
     "subject" : {
