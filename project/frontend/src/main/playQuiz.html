@@ -15,18 +15,15 @@
         <link href="css/style.css" rel="stylesheet">
 
         <script>
-            // Link zum JSON-Objekt nach Spezifikation des API. Vorläufig statisch, später irgendwie mit API
+            // https://raw... = Link zum JSON-Objekt nach Spezifikation des API. Genutzt als default-Wert
             var json_url = 'https://raw.githubusercontent.com/SPRINT-Raketen/SPRINT-Quiz/main/project/frontend/src/main/officialJSONdummy.json';
-                            
-            var json_obj_global; //Zwischenspeicher um JSON von getJSON() an parseJSON () zu übergeben
-            var parsedJSON_global; //Zwischenspeicher um parsedJSON von parseJSON () an distributeJSONcontent ()  zu übergeben
-
+            
             //Variablen zum Zwischenspeichern der Werte aus JSON
             var questionId;
-            var levelId=0; //0=Startwert. So wird zu Quizstart eine Frage mit Level 0 requestet. Später wird levelId der aktuellen Frage +1 requested
-            var value;    
+            var levelId=0; //0=Startwert
+            var value;    //entspricht Wert einer Frage -> nötig für Punkte bei Ausstieg
             var levelText;
-            var subject="Informatik"; //Eigentlich sollte das über die Einladung gemacht werden. Stand 22.03
+            var subject="Informatik"; //"Informatik"=default-Wert. Eigentlich sollte das über die Einladung gemacht werden. Stand 22.03
             var subjectId; 
             var feedback_a;
             var feedback_b;
@@ -44,8 +41,10 @@
                 endpointLevel=level;
 
                 json_url=baseURL+"?level="+endpointLevel+"&subject="+endpointSubject;
+
+                //05.04.21 Markus: untenstehendes zu Testzwecken
+                //json_url="http://localhost:8080/sprintquiz/api/questions/question.php?level=1&subject=1";
                 
-                //return json_url; //Braucht es eigentlich nicht, da eh direkt in globaler Variable abgespeichert wird.
             }
 
             //holt JSON-Objekt ab (vorläufig auf GitHub, später beim API)
@@ -64,6 +63,10 @@
                 //Diesen Teil will ich eigentlich in parseJSON und distributeJSONcontent auslagern, klappt aber noch nicht.
                 .then(myJson => { // lambda to manage consumed jso
                     var parsedJSON = myJson; 
+
+                    //erstes und letztes Zeichen (-> []) entfernen
+                    parsedJSON = cleanJSON (parsedJSON);
+
                     //Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
                     questionId                                          =   parsedJSON.id;
                     levelId                                             =   parsedJSON.level.id;
@@ -80,16 +83,55 @@
                     feedback_c                                          =   parsedJSON.answers[2].Feedback;
                     $("#" + id4).text(parsedJSON.answers[3].text);
                     feedback_d                                          =   parsedJSON.answers[3].Feedback;
-
-                    //05.04.21 Markus: Befüllen der html-Textfelder von js aus. vermutl. überflüssig
-                        //document.getElementById("level").innerHTML          =   levelId;
-                        //document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
-                        //document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
-                        //document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
-                        //document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
                 })
             }
 
+            //schnippelt die eckigen Klammern aus JSON weg
+            function cleanJSON (parsedJSON) {
+                //1. Aus var parsedJSON ein String machen
+                var JSONstring = JSON.stringify(parsedJSON);
+
+                //2. via Substring erstes und letztes Zeichen entfernen
+                var JSONLength = JSONstring.length; //JSONlenght soll die Länge aller Zeichen im JSON erfassen
+                var cleanendJSONstring = JSONstring.substring(1, JSONLength-1); //Erster Parameter: exclusiv, zweiter Parameter: inclusiv
+                
+                //3. den nicht-abgeschnittenen Rest wieder in ein JSON verwandeln& zurückgeben
+                return JSON.parse(cleanendJSONstring);
+            }
+        
+            //Markus 05.04.21: finale Version des REST-API-requests. (Was hier nicht aufgerufen wird, ist überflüssig.)
+            function getNewQuestion (levelId, subject){
+                /*
+                Markus 05.04.21: +1, damit nicht vom gleichen, sondern vom nächsthöheren Level Fragen requestet werden.
+                Nur nötig, wenn +1 nirgends sonst gemacht wird!
+                */
+                levelId++;
+
+                buildAPIrequest (levelId, subject);
+                json_obj_global= getJSON();
+
+                //Markus 05.04.21: folgende Funktionen sind nicht notwendig, nur zur Überprüfung
+                displayCurrentValues ();
+            }
+
+            //Markus 05.04.21: nur eine Testfunktion. Kann gelöscht werden wenn alles läuft
+            function displayCurrentValues (){
+                document.getElementById("json_url_DISPLAY").innerHTML   =   json_url;
+                document.getElementById("Platzhalter_subject").innerHTML=   subject;
+                document.getElementById("Platzhalter_levelId").innerHTML=   levelId;
+            }
+
+            //Markus 05.04.21: wahrscheinlich überflüssig, da in getNewQuestion () schlanker gebaut
+            //alle Schritte zusammen ausführen (neues JSON requesten, dessen Inhalte auf Variablen verteilen)
+            function showNewQuestion (){
+                //buildAPIrequest (levelId, subject);
+                json_obj_global= getJSON();
+                //parsedJSON_global=parseJSON (json_obj_global);
+                //parsedJSON_global=cleanJSON (parsedJSON_global);
+                //distributeJSONcontent(parsedJSON_global);
+            }
+
+            //Markus 05.04.21: wahrscheinlich überflüssig
             //JSON parsen
             function parseJSON (json_obj){
                 document.getElementById("answer3").innerHTML    = "parseJSON: VOR parse"; //nur zur Kontrolle
@@ -98,9 +140,7 @@
                 return parsedJSON_lokal;
             }
 
-            //schnippelt die eckigen Klammern aus JSON weg
-            function cleanJSON (parsedJSON) {}
-        
+            //Markus 05.04.21: wahrscheinlich überflüssig
             //JSON-Inhalte auf verschiedene Felder verteilen
             function distributeJSONcontent (parsedJSON){
                     //Ich lese aus der API-Spezifikation von oben nach unten, egal ob's Variablen oder html-Inhalte sind
@@ -122,47 +162,9 @@
                     var feedback_d                                      =   parsedJSON.answers[3].Feedback;
             }
 
-            //Markus 05.04.21: (hoffentlich) finale Version des REST-API-requests. (Was hier nicht aufgerufen wird, ist überflüssig.)
-            function getNewQuestion (levelId, subject){
-                /*
-                Markus 05.04.21: +1, damit nicht vom gleichen, sondern vom nächsthöheren Level Fragen requestet werden.
-                Nur nötig, wenn +1 nirgends sonst gemacht wird (Am Besten wäre direkt nach korrektem Beantworten)!
-                */
-                levelId++;
-
-                buildAPIrequest (levelId, subject);
-                json_obj_global= getJSON();
-
-                //Markus 05.04.21: folgende Funktionen sind nicht notwendig, nur für visuellen Check/Test
-                displayCurrentValues ();
-                forceJSONcontentOntoScreen ();
-            }
-
-            //Markus 05.04.21: nur eine Testfunktion. Kann gelöscht werden wenn alles läuft
-            function forceJSONcontentOntoScreen (){
-                levelId                                             =   parsedJSON.level.id;
-                document.getElementById("answer_a").innerHTML       =   parsedJSON.answers[0].text;
-                document.getElementById("answer_b").innerHTML       =   parsedJSON.answers[1].text;
-                document.getElementById("answer_c").innerHTML       =   parsedJSON.answers[2].text;
-                document.getElementById("answer_d").innerHTML       =   parsedJSON.answers[3].text;
-            }
-
-            //Markus 05.04.21: nur eine Testfunktion. Kann gelöscht werden wenn alles läuft
-            function displayCurrentValues (){
-                document.getElementById("json_url_DISPLAY").innerHTML       =   json_url;
-                document.getElementById("Platzhalter_subject").innerHTML       =   subject;
-                document.getElementById("Platzhalter_levelId").innerHTML       =   levelId;
-            }
-
-            //Markus 05.04.21: wahrscheinlich überflüssig, da in getNewQuestion () schlanker gebaut
-            //alle Schritte zusammen ausführen (neues JSON requesten, dessen Inhalte auf Variablen verteilen)
-            function showNewQuestion (){
-                //buildAPIrequest (levelId, subject);
-                json_obj_global= getJSON();
-                //parsedJSON_global=parseJSON (json_obj_global);
-                //parsedJSON_global=cleanJSON (parsedJSON_global);
-                //distributeJSONcontent(parsedJSON_global);
-            }
+            //Markus 05.04.21: wahrscheinlich überflüssig
+            var json_obj_global; //Zwischenspeicher um JSON von getJSON() an parseJSON () zu übergeben
+            var parsedJSON_global; //Zwischenspeicher um parsedJSON von parseJSON () an distributeJSONcontent ()  zu übergeben
         </script>
         
         <script src="js/quiz.js"></script>
@@ -360,7 +362,7 @@
         <p> </p>-->
         <!--<button><a href = "index.html" title ="Start Page">Zur Startseite zurück</a></body></button>-->
         
-        <!-- Ergänzung von Markus --> 
+        <!-- 05.04.21 Markus : Button zu Testzwecken. Kann gelöscht werden wenn alles läuft  --> 
         <p></p>
         <button onclick="getNewQuestion (levelId, subject)">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
         <p></p>
