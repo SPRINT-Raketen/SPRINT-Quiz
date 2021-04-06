@@ -26,3 +26,4 @@ Mitarbeit Themenfindung. Verfassen und Bereinigen einiger User Stories auf Backe
 
 
 ## Jan Widmayer
+Mitarbeit bei Themenfindung und beim Verfassen der User-Stories auf Frontend-Seite. Erstellen eines Flow-Charts. Technische und gestalterische Umsetzung der Start- und Quiz-Seite mit der Anzeige der Fragen/Antworten, des individuellen Feedbacks, dem zufälligen Anzeigen der Fragen und einer visuellen Anzeige, auf welchem Level die jeweilige Frage ist. Erstellen eines JSON-Arrays zum Testen der Funktionalitäten. Terminfindung und Leitung der Gruppensitzungen. Präsentation der Ergebnisse an drei Vorlesungstagen. 
