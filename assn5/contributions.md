@@ -19,6 +19,7 @@ Mitarbeit Themenfindung und Ziele des Projekts; Initialarbeiten auf GitHub (erst
 
 
 ## Marcel Pilloud
+Mitarbeit Themenfindung. Verfassen und Bereinigen einiger User Stories auf Backend-Seite. Technische Abklärung zum Systemaufbau. Datenbank aufgesetzt und dokumentiert (ERD). Prototyp des RESTful API inklusive Beispiel-Site auf Seite Client. Programmierung des RESTful API und Dokumentation dessen. Test des RESTful API. Unterstützung und Mitarbeit bei Component-, Deployment- und Klassendiagramm. Technische Unterstützung bei der Datenbank. Unterstützung (Troubleshooting) des Frontend-Teams.
 
 
 ## Markus Teuffel
