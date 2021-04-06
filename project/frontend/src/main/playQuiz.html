@@ -21,7 +21,7 @@
             //Variablen zum Zwischenspeichern der Werte aus JSON
             var questionId;
             var levelId=0; //0=Startwert
-            var value;    //entspricht Wert einer Frage -> nötig für Punkte bei Ausstieg
+            var value=123;    //entspricht Wert einer Frage -> nötig für Punkte bei Ausstieg
             var levelText;
             var subject;
             var subjectId; 
@@ -327,6 +327,13 @@
                 <button class="btn btn-dark .btn-circle.btn-xl" id="newQuiz" style="display:none">                                            
                 <a href = "results.html">Weiter</a></button></div>      
         </div>
+
+        <!--06.04.21 Markus: Übergabe des aktuellen Punktestandes von playQuiz.html an results.html
+        START SENDEN-->
+            <!--https://stackoverflow.com/questions/3724106/how-to-exchange-variables-between-two-html-pages-->
+            <a href='results.html?points=value'>send points</a>
+        <!--06.04.21 Markus: Übergabe des aktuellen Punktestandes von playQuiz.html an results.html
+        ENDE SENDEN-->
     </body>
 </html>
 

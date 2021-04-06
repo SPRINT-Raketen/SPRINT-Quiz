@@ -17,12 +17,16 @@
         <script src="js/script.js"></script>
         <script src="js/quiz.js"></script>
         
-        <script>
-            function showPoints (){
-                document.getElementById("points").innerHTML  =   value;
-            }
-        </script>
-
+        <!--06.04.21 Markus: Übergabe des aktuellen Punktestandes von playQuiz.html an results.html
+        START EMPFANGEN-->
+            <!--https://stackoverflow.com/questions/3724106/how-to-exchange-variables-between-two-html-pages-->
+            <script>
+                var qs = new Querystring();
+                var v1 = qs.get("value");
+                console.log (qs, v1);
+            </script>
+        <!--06.04.21 Markus: Übergabe des aktuellen Punktestandes von playQuiz.html an results.html
+        ENDE EMPFANGEN-->
     </head>
 
     <body>
@@ -51,14 +55,6 @@
                 <button class="btn btn-dark .btn-circle.btn-xl" id="newQuiz">                                            
                 <a href = "playQuiz.html"><h4>Neues Quiz</h4></button></div>      
         </div>
-
-        <!-- 05.04.21 Markus : Button zu Testzwecken. Kann gelöscht werden wenn alles läuft  --> 
-        <p></p>
-        <button onclick="showPoints ()">Punktestand</button> <p></p>
-        <p></p>
-
-        <!--<button><a href = "playQuiz.html" title ="Start Page">Zur Startseite zurück</a></button>-->
-
     </body>
 
 </html>
