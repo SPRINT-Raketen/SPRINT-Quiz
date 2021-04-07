@@ -110,8 +110,11 @@
             createRequest(url,data);
         }
         function updateSubject() {
+            url = subjectUrl;
             id = document.getElementById("subject_id").value;
-            url = subjectUrl + "?id=" + id;
+            if(id){
+                url = url + "?id=" + id;
+            }
             subject = document.getElementById("subject_text").value;
             data = { 'text': subject };
             updateRequest(url, data);
