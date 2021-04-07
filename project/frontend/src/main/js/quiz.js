@@ -19,7 +19,7 @@ function getRightAnswer(){
 }
 
 function getLastQuestion(){
-  var lastQuestion = questions.length;
+  var lastQuestion = 6; //07.04.21 Markus: Achtung magic number! In späteren Stufen dynamisch mittels zusätzlichem REST-API-request  
   return lastQuestion;
 }
 
