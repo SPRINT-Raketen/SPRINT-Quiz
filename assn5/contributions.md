@@ -16,7 +16,7 @@ Mitarbeit bei Themenfindung, Projektziel und Verfassen/Bereinigen der User Stori
 
 
 ## Michael Pfyl
-Mitarbeit Themenfindung. Idee von sprintquiz. Verfassen/Bereinigen der User Stories auf Backend-Seite. Datenbank mit Fragen und Anworten füllen.
+Mitarbeit Themenfindung. Idee von sprintquiz. Verfassen/Bereinigen der User Stories auf Backend-Seite. Erstellen und Auswerten von Fragebogen zu Estimate und in User Stories ergänzen. Datenbank sprintquiz mit Fragen und Anworten (Feedback) füllen. 6 Level definieren. 
 
 
 ## Marcel Pilloud
