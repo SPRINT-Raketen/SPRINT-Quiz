@@ -9,6 +9,7 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/script.js"></script>
+        <script src="js/questions.js"></script>
 
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +22,7 @@
             //Variablen zum Zwischenspeichern der Werte aus JSON
             var questionId;
             var levelId=0; //0=Startwert
-            var value=123;    //entspricht Wert einer Frage -> nötig für Punkte bei Ausstieg
+            var value;    //entspricht Wert einer Frage -> nötig für Punkte bei Ausstieg
             var levelText;
             var subject;
             var subjectId; 
@@ -32,7 +33,7 @@
 
             //generiert Anfrage an API mit Parametern Level & subject
             function buildAPIrequest (level, subjectId) {
-                var baseURL = "http://localhost:80/sprintquiz/backend/src/main/sprintquiz/api/questions/question.php";
+                var baseURL = "http://localhost:80/sprintquiz/api/questions/question.php";
                 var APIcommand = "GET "; //GET ist eh default bei fetch(). Da ich vom frontend her nur GET brauche, kann ich das weglassen
                 var endpointLevel;
                 var endpointSubjectId=1; //Vorläufig per default "1", weil nur Fragen aus der Kategorie 1 (="Allgemein") bestehen
@@ -44,7 +45,7 @@
 
             }
 
-            //holt JSON-Objekt ab
+            //holt JSON-Objekt ab (vorläufig auf GitHub, später beim API)
             function getJSON (){
                 console.log ("getJSON: "+json_url);
                 fetch(json_url)
@@ -76,6 +77,9 @@
                     value                                               =   parsedJSON.level.value;
                     levelText                                           =   parsedJSON.level.text;
                     subjectId                                           =   parsedJSON.subject.id;
+                    document.getElementById("levelId").innerHTML        =   parsedJSON.level.id;
+                    document.getElementById("levelValue").innerHTML     =   parsedJSON.level.value;
+                    document.getElementById("subjectId").innerHTML      =   parsedJSON.subject.id;
                     document.getElementById("subjectText").innerHTML    =   parsedJSON.subject.text;
                     document.getElementById("question_text").innerHTML  =   parsedJSON.question;
                     $("#" + id1).text(parsedJSON.answers[0].text);
@@ -101,15 +105,17 @@
                 json_obj_global= getJSON();
 
                 //Markus 05.04.21: folgende Funktionen sind nicht notwendig, nur zur Überprüfung
-                //displayCurrentValues ();
+                displayCurrentValues ();
+                console.log("LevelID 1: " + levelId);
+
             }
 
             //Markus 05.04.21: nur eine Testfunktion. Kann gelöscht werden wenn alles läuft
-            // function displayCurrentValues (){
-            //     document.getElementById("json_url_DISPLAY").innerHTML   =   json_url;
-            //     document.getElementById("Platzhalter_subject").innerHTML=   subject;
-            //     document.getElementById("Platzhalter_levelId").innerHTML=   levelId;
-            // }
+            function displayCurrentValues (){
+                document.getElementById("json_url_DISPLAY").innerHTML   =   json_url;
+                document.getElementById("Platzhalter_subject").innerHTML=   subject;
+                document.getElementById("Platzhalter_levelId").innerHTML=   levelId;
+            }
         </script>
         
         <script src="js/quiz.js"></script>
@@ -215,38 +221,13 @@
                          </div>
                     </div>
                 </div>
-                
-                <!-- Start Ergänzung von Markus. Stand 24.03. Zum Test des REST API. Ohne weitere Funktion. Kann gelöscht werden. --> 
-                
-                <!-- 07.04.21 Markus: Button um REST-API-request manuell zu starten. Anstatt automatischem request bei neuer Frage
-                    <p></p>
-                    <button onclick="getNewQuestion (levelId, subject)">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
-                    <p></p>
-                --> 
+                <p></p>
 
-                <!-- 07.04.21 Markus: Felder um REST-API-request, aktueller Fragen-Level und subject darzustellen. Erleichtert Fehlersuche --> 
-                    <!-- 
-                    <div class="row">
-                        <div class="col-md-1"></div>  
-                        <h4 id="json_url_DISPLAY" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter Anzeige link REST API request</h3> 
-                        <div class="col-md-2"></div>
-                    </div> 
-                    
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <h4 id="Platzhalter_levelId" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter_levelId</h3>
-                        <div class="col-md-2"></div>
-                    </div>
+            </form> 
+        </section>   
 
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <h4 id="Platzhalter_subject" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter_subject</h3>
-                        <div class="col-md-2"></div>
-                    </div>
-                    -->
-                <!-- Ende Ergänzung von Markus. -->
-            </form>
-        </section>
+            
+    
         <p></p>
 
         <!--display feedback-->
@@ -322,10 +303,10 @@
         
         <p> </p>
         <!--<button><a href = "results.html" title ="Anzeige der aktuellen Punkte">Quiz beenden</a></body></button> <p></p>-->
-        </section>
+        <!--</section>
         <section id="congratulation" style="display:none">
         <button><a href = "congratulation.html" title ="Anzeige bei erfolgreichen Abschluss des Quiz">Gratulationsbildschirm</a></body></button>
-        </section>
+        </section>-->
         <!--Möglichkeit, das Resultat anzuschauen und ein neues Quiz zu starten-->
         <div class="row">
             <div class="col-md-1"></div>
@@ -334,14 +315,28 @@
                 <a href = "results.html">Weiter</a></button></div>      
         </div>
 
-        <!--06.04.21 Markus: Übergabe des aktuellen Punktestandes von playQuiz.html an results.html
-        START SENDEN
-        07.04.21 Markus: Läuft leider nicht richtig: gestrichen
-        -->
-            <!--https://stackoverflow.com/questions/3724106/how-to-exchange-variables-between-two-html-pages-->
-            <!-- <a href='results.html?points=value'>send points</a> -->
-        <!--06.04.21 Markus: Übergabe des aktuellen Punktestandes von playQuiz.html an results.html
-        ENDE SENDEN-->
+        <!-- Start Ergänzung von Markus. Stand 24.04. Zum Test des REST API. Kann gelöscht werden. --> 
+        <!--<p></p>
+        <button onclick="getNewQuestion (levelId, subject)">Frage aus JSON laden (JSON wird später mal von API requested)</button> <p></p>
+        <p></p>-->
+        <div class="row">
+            <div class="col-md-1"></div>  
+            <h4 id="json_url_DISPLAY" style="visibility: hidden" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter Anzeige link REST API request</h3>
+            <div class="col-md-2"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-1"></div>
+            <h4 id="Platzhalter_levelId" style="visibility: hidden" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter_levelId</h3>
+            <div class="col-md-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <h4 id="Platzhalter_subject" style="visibility: hidden" class="col-md-9 d-block p-2 bg-primary text-yellow">Platzhalter_subject</h3>
+            <div class="col-md-2"></div>
+        </div>
+        <!-- Ende Ergänzung von Markus. -->
     </body>
 </html>
 
